@@ -26,6 +26,13 @@ public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI m_oi;
 
+  // JT: I've copied the drivetrain setup from the 2018 code as a test. This needs to be updated (1/6/19)
+  // JT: Did WPI drop support for the Talon's? What do we need to import now?
+  //WPI_TalonSRX frontLeftDrive = new WPI_TalonSRX(11);
+	//WPI_TalonSRX backLeftDrive = new WPI_TalonSRX(10);
+	//WPI_TalonSRX frontRightDrive = new WPI_TalonSRX(21);
+	//WPI_TalonSRX backRightDrive = new WPI_TalonSRX(20);
+
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
