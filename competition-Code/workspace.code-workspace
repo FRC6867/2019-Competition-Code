@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "C:\\Users\\johnt\\Documents\\VSCode\\masterCode\\masterCode"
+		},
+		{
+			"path": "C:\\Users\\johnt\\Documents\\VSCode\\masterCode\\2019-Competition-Code",
+			"name": "2019-Competition-Code"
+		}
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "automatic"
+	}
+}
