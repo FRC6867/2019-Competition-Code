@@ -19,6 +19,19 @@ public class RobotMap {
   // public static int leftMotor = 1;
   // public static int rightMotor = 2;
 
+  //Digital pins for drive encoders
+  public static int leftDriveEncoderPin1 = 0;
+  public static int leftDriveEncoderPin2 = 1;
+  public static int rightDriveEncoderPin1 = 2;
+  public static int rightDriveEncoderPin2 = 3;
+
+  //CAN IDs for drive motors
+  public static int FRONT_LEFT_DRIVE_CAN = 11;
+  public static int BACK_LEFT_DRIVE_CAN = 10;
+  public static int FRONT_RIGHT_DRIVE_CAN = 21;
+  public static int BACK_RIGHT_DRIVE_CAN = 20;
+ 
+
   // If you are using multiple modules, make sure to define both the port
   // number and the module. For example you with a rangefinder:
   // public static int rangefinderPort = 1;

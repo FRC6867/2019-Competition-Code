@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import frc.robot.RobotMap;
 
 
 //JT: I'm working from BadRobots1014's code https://github.com/BadRobots1014/BadRobot2013/blob/master/src/com/badrobot/subsystems/DriveTrain.java
@@ -37,9 +38,9 @@ public class DriveTrain extends Subsystem {
 
     public void initialize() {
         
-            //JT: Copying configuration from last year's robot. Move this to RobotMap later to make things easier. Updating subsystems individually will be a pain.
-            leftEncoder = new Encoder(0,1,false,Encoder.EncodingType.k4X);
-            rightEncoder = new Encoder(2,3,false,Encoder.EncodingType.k4X);
+            //Set up drive encoders
+            leftEncoder = new Encoder(RobotMap.leftDriveEncoderPin1,RobotMap.leftDriveEncoderPin2,false,Encoder.EncodingType.k4X);
+            rightEncoder = new Encoder(RobotMap.rightDriveEncoderPin1,RobotMap.rightDriveEncoderPin2,false,Encoder.EncodingType.k4X);
 
             //JT: NavX needs to be initialized here.
 
@@ -48,12 +49,10 @@ public class DriveTrain extends Subsystem {
             //JT: WPI removed support for the Talon SRX's, and the toolchains need to be installed separately.
             //JT: Our programmers will need to download and install the framework themselves.
             //JT: http://www.ctr-electronics.com/control-system/hro.html#product_tabs_technical_resources
-            //JT: These should also be moved to RobotMap
-            frontLeftDrive = new TalonSRX(11);
-            backLeftDrive = new TalonSRX(10);
-            frontRightDrive = new TalonSRX(21);
-            backRightDrive = new TalonSRX(20);   
-
+            frontLeftDrive = new TalonSRX(RobotMap.FRONT_LEFT_DRIVE_CAN);
+            backLeftDrive = new TalonSRX(RobotMap.BACK_LEFT_DRIVE_CAN);
+            frontRightDrive = new TalonSRX(RobotMap.FRONT_RIGHT_DRIVE_CAN);
+            backRightDrive = new TalonSRX(RobotMap.BACK_RIGHT_DRIVE_CAN);   
     }
 
 
