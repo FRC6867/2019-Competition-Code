@@ -13,6 +13,7 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.Robot;
 import frc.robot.OI;
 import edu.wpi.first.wpilibj.Joystick;
+import frc.robot.RobotMap;
 
 /**
  * This command gives basic drive controls to the user through a two-stick gamepad.
@@ -37,8 +38,8 @@ public class DriveWithController extends Command {
   protected void execute() {
       //JT: This is where the driver code is actually going to go!
       
-      driveSystem.leftDrive(- gamepad.getRawAxis(1));
-      driveSystem.rightDrive(- gamepad.getRawAxis(5));
+      driveSystem.leftDrive(- gamepad.getRawAxis(RobotMap.LeftAxisStick));
+      driveSystem.rightDrive(- gamepad.getRawAxis(RobotMap.RightAxisStick));
 
   }
 
