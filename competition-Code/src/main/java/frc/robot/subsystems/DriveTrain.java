@@ -18,6 +18,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 public class DriveTrain extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
+    TalonSRX frontLeftDrive, backLeftDrive, frontRightDrive, backRightDrive;
     Encoder leftEncoder;
     Encoder rightEncoder;
     public static DriveTrain instance;
@@ -30,7 +31,7 @@ public class DriveTrain extends Subsystem {
     }
 
 
-    private DriveTrain() {
+    public DriveTrain() {
     }
 
 
@@ -48,12 +49,23 @@ public class DriveTrain extends Subsystem {
             //JT: Our programmers will need to download and install the framework themselves.
             //JT: http://www.ctr-electronics.com/control-system/hro.html#product_tabs_technical_resources
             //JT: These should also be moved to RobotMap
-            TalonSRX frontLeftDrive = new TalonSRX(11);
-            TalonSRX backLeftDrive = new TalonSRX(10);
-            TalonSRX frontRightDrive = new TalonSRX(21);
-            TalonSRX backRightDrive = new TalonSRX(20);   
+            frontLeftDrive = new TalonSRX(11);
+            backLeftDrive = new TalonSRX(10);
+            frontRightDrive = new TalonSRX(21);
+            backRightDrive = new TalonSRX(20);   
+
     }
 
+
+    public void rightDrive(double speed) {
+		frontRightDrive.set(ControlMode.PercentOutput, -speed);
+		backRightDrive.set(ControlMode.PercentOutput, -speed);
+	}
+	
+	public void leftDrive(double speed) {
+		frontLeftDrive.set(ControlMode.PercentOutput, speed);
+		backLeftDrive.set(ControlMode.PercentOutput, speed);
+	}
 
     @Override
     public void initDefaultCommand() {

@@ -12,8 +12,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.commands.*;
+import frc.robot.subsystems.*;
+import frc.robot.OI;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -23,15 +24,11 @@ import frc.robot.subsystems.ExampleSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
+  Command driverControls;
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
+  public static DriveTrain m_drivetrain = new DriveTrain();
   public static OI m_oi;
 
-  // JT: I've copied the drivetrain setup from the 2018 code as a test. This needs to be updated (1/6/19)
-  // JT: Did WPI drop support for the Talon's? What do we need to import now?
-  //WPI_TalonSRX frontLeftDrive = new WPI_TalonSRX(11);
-	//WPI_TalonSRX backLeftDrive = new WPI_TalonSRX(10);
-	//WPI_TalonSRX frontRightDrive = new WPI_TalonSRX(21);
-	//WPI_TalonSRX backRightDrive = new WPI_TalonSRX(20);
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -42,10 +39,14 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    m_drivetrain = new DriveTrain();
     m_oi = new OI();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+    SmartDashboard.putData(m_drivetrain);
+
+
   }
 
   /**
@@ -119,6 +120,10 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+
+    Command driverControls = new DriveWithController();
+    driverControls.start();
+  
   }
 
   /**
@@ -126,7 +131,14 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+
     Scheduler.getInstance().run();
+
+    //JT: Just in case, if for some reason we lose control this restarts the control command
+    if (Robot.m_drivetrain.getCurrentCommand() == null) {
+      Scheduler.getInstance().add(new DriveWithController());
+    }
+
   }
 
   /**
