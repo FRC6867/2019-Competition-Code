@@ -31,6 +31,9 @@ public class RobotMap {
   public static int FRONT_RIGHT_DRIVE_CAN = 21;
   public static int BACK_RIGHT_DRIVE_CAN = 20;
  
+  //Joystick Mapping
+  public static int LeftAxisStick = 1;
+  public static int RightAxisStick = 5;
 
   // If you are using multiple modules, make sure to define both the port
   // number and the module. For example you with a rangefinder:
