@@ -19,7 +19,7 @@ public class RobotMap {
   // public static int leftMotor = 1;
   // public static int rightMotor = 2;
 
-  //Digital pins for drive encoders
+  //DIO for drive encoders
   public static int leftDriveEncoderPin1 = 0;
   public static int leftDriveEncoderPin2 = 1;
   public static int rightDriveEncoderPin1 = 2;
