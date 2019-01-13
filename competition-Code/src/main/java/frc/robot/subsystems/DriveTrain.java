@@ -8,55 +8,39 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.Encoder;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import frc.robot.RobotMap;
 
 
-//JT: I'm working from BadRobots1014's code https://github.com/BadRobots1014/BadRobot2013/blob/master/src/com/badrobot/subsystems/DriveTrain.java
-
+/**
+ * An example subsystem.  You can replace me with your own Subsystem.
+ */
 public class DriveTrain extends Subsystem {
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-    TalonSRX frontLeftDrive, backLeftDrive, frontRightDrive, backRightDrive;
-    Encoder leftEncoder;
-    Encoder rightEncoder;
-    public static DriveTrain instance;
+  //JT: WPI removed support for the Talon SRX's, and the toolchains need to be installed separately.
+  //JT: Our programmers will need to download and install the framework themselves.
+  //JT: http://www.ctr-electronics.com/control-system/hro.html#product_tabs_technical_resources
+  public TalonSRX frontLeftDrive = new TalonSRX(RobotMap.FRONT_LEFT_DRIVE_CAN);
+  public TalonSRX backLeftDrive = new TalonSRX(RobotMap.BACK_LEFT_DRIVE_CAN);
+  public TalonSRX frontRightDrive = new TalonSRX(RobotMap.FRONT_RIGHT_DRIVE_CAN);
+  public TalonSRX backRightDrive = new TalonSRX(RobotMap.BACK_RIGHT_DRIVE_CAN);   
 
-    public static DriveTrain getInstance() {
-        if (instance == null) {
-            instance = new DriveTrain();
-        }
-        return instance;
-    }
+  //Set up drive encoders            
+  Encoder leftEncoder = new Encoder(RobotMap.leftDriveEncoderPin1,RobotMap.leftDriveEncoderPin2,false,Encoder.EncodingType.k4X);
+  Encoder rightEncoder = new Encoder(RobotMap.rightDriveEncoderPin1,RobotMap.rightDriveEncoderPin2,false,Encoder.EncodingType.k4X);
+  
+  //JT: NavX needs to be initialized here.
+  
+  //JT: Line trackers and ultrasonics should also initialized here.
+  
+  @Override
+  public void initDefaultCommand() {
+    // Set the default command for a subsystem here.
+    // setDefaultCommand(new MySpecialCommand());
+  }
 
-
-    public DriveTrain() {
-    }
-
-
-    public void initialize() {
-        
-            //Set up drive encoders
-            leftEncoder = new Encoder(RobotMap.leftDriveEncoderPin1,RobotMap.leftDriveEncoderPin2,false,Encoder.EncodingType.k4X);
-            rightEncoder = new Encoder(RobotMap.rightDriveEncoderPin1,RobotMap.rightDriveEncoderPin2,false,Encoder.EncodingType.k4X);
-
-            //JT: NavX needs to be initialized here.
-
-            //JT: Line trackers and ultrasonics should also initialized here.
-
-            //JT: WPI removed support for the Talon SRX's, and the toolchains need to be installed separately.
-            //JT: Our programmers will need to download and install the framework themselves.
-            //JT: http://www.ctr-electronics.com/control-system/hro.html#product_tabs_technical_resources
-            frontLeftDrive = new TalonSRX(RobotMap.FRONT_LEFT_DRIVE_CAN);
-            backLeftDrive = new TalonSRX(RobotMap.BACK_LEFT_DRIVE_CAN);
-            frontRightDrive = new TalonSRX(RobotMap.FRONT_RIGHT_DRIVE_CAN);
-            backRightDrive = new TalonSRX(RobotMap.BACK_RIGHT_DRIVE_CAN);   
-    }
-
-
-    public void rightDrive(double speed) {
+  public void rightDrive(double speed) {
 		frontRightDrive.set(ControlMode.PercentOutput, -speed);
 		backRightDrive.set(ControlMode.PercentOutput, -speed);
 	}
@@ -64,11 +48,6 @@ public class DriveTrain extends Subsystem {
 	public void leftDrive(double speed) {
 		frontLeftDrive.set(ControlMode.PercentOutput, speed);
 		backLeftDrive.set(ControlMode.PercentOutput, speed);
-	}
-
-    @Override
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        // setDefaultCommand(new MySpecialCommand());
-    }
+  }
+  
 }
