@@ -137,10 +137,16 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
 
     //JT: Just in case, if for some reason we lose control this restarts the control command
+    /*
     if (Robot.m_drivetrain.getCurrentCommand() == null) {
       Scheduler.getInstance().add(new DriveWithController());
     }
 
+  */
+    /*
+    m_drivetrain.rightDrive(0.5);
+    m_drivetrain.leftDrive(0.5);
+    */
   }
 
   /**

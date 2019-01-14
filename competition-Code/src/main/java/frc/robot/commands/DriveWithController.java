@@ -19,13 +19,11 @@ import frc.robot.RobotMap;
  * This command gives basic drive controls to the user through a two-stick gamepad.
  */
 public class DriveWithController extends Command {
-    private DriveTrain driveSystem;
-    private Joystick gamepad;
 
-    public DriveWithController() {
-    // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_drivetrain);
- 
+
+  public DriveWithController() {
+  // Use requires() here to declare subsystem dependencies
+  requires(Robot.m_drivetrain);
   }
 
   // Called just before this Command runs the first time
@@ -37,9 +35,9 @@ public class DriveWithController extends Command {
   @Override
   protected void execute() {
       //JT: This is where the driver code is actually going to go!
-      
-      driveSystem.leftDrive(- gamepad.getRawAxis(RobotMap.LeftAxisStick));
-      driveSystem.rightDrive(- gamepad.getRawAxis(RobotMap.RightAxisStick));
+     
+      Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.leftAxisStick));
+      Robot.m_drivetrain.rightDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightAxisStick));
 
   }
 

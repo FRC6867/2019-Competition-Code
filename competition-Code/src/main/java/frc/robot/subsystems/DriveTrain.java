@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Encoder;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import frc.robot.RobotMap;
 
 
@@ -21,10 +22,20 @@ public class DriveTrain extends Subsystem {
   //JT: WPI removed support for the Talon SRX's, and the toolchains need to be installed separately.
   //JT: Our programmers will need to download and install the framework themselves.
   //JT: http://www.ctr-electronics.com/control-system/hro.html#product_tabs_technical_resources
+
+
+  //JT: Which drive base are we on? Comment out depending on which one we want
+  /*
   public TalonSRX frontLeftDrive = new TalonSRX(RobotMap.FRONT_LEFT_DRIVE_CAN);
   public TalonSRX backLeftDrive = new TalonSRX(RobotMap.BACK_LEFT_DRIVE_CAN);
   public TalonSRX frontRightDrive = new TalonSRX(RobotMap.FRONT_RIGHT_DRIVE_CAN);
   public TalonSRX backRightDrive = new TalonSRX(RobotMap.BACK_RIGHT_DRIVE_CAN);   
+  */
+
+  public VictorSPX frontLeftDrive = new VictorSPX(RobotMap.FRONT_LEFT_DRIVE_CAN);
+  public VictorSPX backLeftDrive = new VictorSPX(RobotMap.BACK_LEFT_DRIVE_CAN);
+  public VictorSPX frontRightDrive = new VictorSPX(RobotMap.FRONT_RIGHT_DRIVE_CAN);
+  public VictorSPX backRightDrive = new VictorSPX(RobotMap.BACK_RIGHT_DRIVE_CAN);   
 
   //Set up drive encoders            
   Encoder leftEncoder = new Encoder(RobotMap.leftDriveEncoderPin1,RobotMap.leftDriveEncoderPin2,false,Encoder.EncodingType.k4X);
