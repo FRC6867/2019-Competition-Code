@@ -38,15 +38,23 @@ public class DriveGTA extends Command {
       //speed
       double speed = 0.8;
       //forward
-      Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightAxisStick) * speed);
-      Robot.m_drivetrain.rightDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightAxisStick) * speed);
+      if (Robot.m_oi.gamepad.getRawAxis(RobotMap.rightAxisStick) >= 0.5)
+      {
+      Robot.m_drivetrain.leftDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightAxisStick)) * speed);
+      Robot.m_drivetrain.rightDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightAxisStick)) * speed);
+      }
       //backwards 
-      Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(-RobotMap.leftTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightAxisStick) * speed);
-      Robot.m_drivetrain.rightDrive(Robot.m_oi.gamepad.getRawAxis(-RobotMap.leftTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightAxisStick) * speed);
+      
+      if (Robot.m_oi.gamepad.getRawAxis(RobotMap.rightAxisStick) >= -0.5)
+      {
+      Robot.m_drivetrain.leftDrive((Robot.m_oi.gamepad.getRawAxis(-RobotMap.leftTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightAxisStick)) * speed);
+      Robot.m_drivetrain.rightDrive((Robot.m_oi.gamepad.getRawAxis(-RobotMap.leftTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightAxisStick)) * speed);
+      }
+      
       //turning
-      Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightAxisStick) * speed);
-      Robot.m_drivetrain.rightDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightAxisStick) * speed);
-       
+      Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightAxisStick));
+      Robot.m_drivetrain.rightDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightAxisStick));
+
       /*
       Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.leftAxisStick));
       Robot.m_drivetrain.rightDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightAxisStick));
