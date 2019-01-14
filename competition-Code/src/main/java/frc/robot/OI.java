@@ -45,7 +45,7 @@ public class OI {
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
   public void init() {
-    gamepad = new Joystick(1); //1 corresponds to the USB port
+    gamepad = new Joystick(0); //1 corresponds to the USB port
 
   }
 
