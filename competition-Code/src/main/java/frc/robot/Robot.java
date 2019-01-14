@@ -123,7 +123,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
 
-    Command driverControls = new DriveWithController();
+    Command driverControls = new DriveGTA();
     driverControls.start();
   
   }
