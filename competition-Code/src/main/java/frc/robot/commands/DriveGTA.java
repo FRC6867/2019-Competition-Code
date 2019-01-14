@@ -42,6 +42,14 @@ public class DriveGTA extends Command {
       //backwards 
       Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(-RobotMap.leftTrigger));
       Robot.m_drivetrain.rightDrive(Robot.m_oi.gamepad.getRawAxis(-RobotMap.leftTrigger));
+      //turning
+      Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(-RobotMap.leftAxisStick));
+      Robot.m_drivetrain.rightDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.leftAxisStick));
+      
+      Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightAxisStick));
+      Robot.m_drivetrain.rightDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightAxisStick));
+      
+      
       /*
       Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.leftAxisStick));
       Robot.m_drivetrain.rightDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightAxisStick));
