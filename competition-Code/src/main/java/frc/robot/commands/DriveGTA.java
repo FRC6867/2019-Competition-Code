@@ -35,16 +35,25 @@ public class DriveGTA extends Command {
   @Override
   protected void execute() {
       //JT: This is where the driver code is actually going to go!
+      
       //speed
+      //JT: I know this is a temp until we put a master variable somewhere (in RobotMap or in the subsystem?) but this isn't a helpful variable name. Let's call it speedThrottle or speedLimit or speedReducer or speedCap or something like that
       double speed = 0.8;
+      
+    
       //forward
+      //JT: Ok, so if right trigger is pulled go forward. This is ok.
       if (Robot.m_oi.gamepad.getRawAxis(RobotMap.rightAxisStick) >= 0.5)
       {
       Robot.m_drivetrain.leftDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightAxisStick)) * speed);
       Robot.m_drivetrain.rightDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightAxisStick)) * speed);
       }
+    
+    
       //backwards 
-      
+      //JT: And here you've got a couple problems. First, you're looking at the right trigger again. You probably want the left trigger, no?
+      //JT: And then you have a second problem. The triggers only ever go from 0 to 1 (there's no negative on them), so this statement is always true.
+      //JT: And as a last point... Is the math for a reverse turn the same as the math for a forward turn? I'll let you test and find out...
       if (Robot.m_oi.gamepad.getRawAxis(RobotMap.rightAxisStick) >= -0.5)
       {
       Robot.m_drivetrain.leftDrive((Robot.m_oi.gamepad.getRawAxis(-RobotMap.leftTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightAxisStick)) * speed);
@@ -52,9 +61,12 @@ public class DriveGTA extends Command {
       }
       
       //turning
+      //JT: And as a last point, these two lines shouldn't be here. execute() is going to run these two lines every time you go through the loop, so as soon as we get the code inside the if-statements we're going to be resetting to this again
+      //JT: Just take this out. Try it and see.
       Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightAxisStick));
       Robot.m_drivetrain.rightDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightAxisStick));
 
+      //JT: And I know these are commented out, but as a code clean-up you can just get rid of them.
       /*
       Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.leftAxisStick));
       Robot.m_drivetrain.rightDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightAxisStick));
