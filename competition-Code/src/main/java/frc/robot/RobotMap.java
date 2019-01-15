@@ -32,8 +32,8 @@ public class RobotMap {
   public static int BACK_RIGHT_DRIVE_CAN = 20;
  
   //Joystick Mapping
-  public static int leftAxisStick = 1;
-  public static int rightAxisStick = 5;
+  public static int leftStickAxisY = 1;
+  public static int rightStickAxisY = 5;
   public static int rightTrigger = 3;
   public static int leftTrigger = 2;
 
