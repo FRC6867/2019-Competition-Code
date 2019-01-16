@@ -18,10 +18,10 @@ import frc.robot.RobotMap;
 /**
  * This command gives basic drive controls to the user through a two-stick gamepad.
  */
-public class DriveGTA extends Command {
+public class DriveCOD extends Command {
 
 
-  public DriveGTA() {
+  public DriveCOD() {
   // Use requires() here to declare subsystem dependencies
   requires(Robot.m_drivetrain);
   }
@@ -41,41 +41,23 @@ public class DriveGTA extends Command {
       double speedCap = 0.8;
       
     
-      //forward
-      
-      if (Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) >= 0.5)
+      //Forward & backward
+      if (Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY) >= 0.5)
       {
-      Robot.m_drivetrain.leftDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY)) * speedCap);
-      Robot.m_drivetrain.rightDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY)) * speedCap);
+      Robot.m_drivetrain.leftDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY) + Robot.m_oi.gamepad.getRawAxis(RobotMap.leftStickAxisX)) * speedCap);
+      Robot.m_drivetrain.rightDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY) + Robot.m_oi.gamepad.getRawAxis(RobotMap.leftStickAxisX)) * speedCap);
       }
-    
-      //backwards
-      
-      else if (Robot.m_oi.gamepad.getRawAxis(RobotMap.leftTrigger) >= 0.5)
+      //turning
+      else if ((Robot.m_oi.gamepad.getRawAxis((RobotMap.leftStickAxisX) >= 0.5) || (Robot.m_oi.gamepad.getRawAxis((RobotMap.leftStickAxisX) <= 0.5))
       {
-      Robot.m_drivetrain.leftDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.leftTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY)) * -speedCap);
-      Robot.m_drivetrain.rightDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.leftTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY)) * -speedCap);
+        Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX));
+        Robot.m_drivetrain.rightDrive(-Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX));  
       }
-
-      //Stopping
-
+      //very confused as to why this is underlined?
       else
       {
         Robot.m_drivetrain.leftDrive(0);
         Robot.m_drivetrain.rightDrive(0);
-      }
-      
-      //turning
-      
-      if (Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX) >= 0.5)
-      {
-        Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX));
-        Robot.m_drivetrain.rightDrive(-Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX));
-      }
-      else if(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX) <= -0.5)
-      {
-        Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX));
-        Robot.m_drivetrain.rightDrive(-Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX));
       }
     }
   // Make this return true when this Command no longer needs to run execute()
