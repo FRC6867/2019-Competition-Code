@@ -36,37 +36,38 @@ public class DriveGTA extends Command {
   protected void execute() {
       //JT: This is where the driver code is actually going to go!
       
-      //speedCap
-      //JT: I know this is a temp until we put a master variable somewhere (in RobotMap or in the subsystem?) but this isn't a helpful variable name. Let's call it speedThrottle or speedLimit or speedReducer or speedCap or something like that
+      //speedCap sets a maximum speed
+      //JT: Should we move speedCap to a central location?
       double speedCap = 0.8;
       
     
-      //forward
+      //JT: Adding a deadzone is a good idea, but 0.5 is huge! That's half the range! What if we want to go slow?
       
+      //Right trigger to go forward...
       if (Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) >= 0.5)
       {
+      //JT: This code is going to have trouble turning. The max value that can go into leftDrive/rightDrive is 1. If the trigger is already at 1 you're already moving at 0.8, so your turn can only add another 0.2
       Robot.m_drivetrain.leftDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY)) * speedCap);
       Robot.m_drivetrain.rightDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY)) * speedCap);
       }
     
-      //backwards
-      
+      //Left trigger to go backward      
       else if (Robot.m_oi.gamepad.getRawAxis(RobotMap.leftTrigger) >= 0.5)
       {
       Robot.m_drivetrain.leftDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.leftTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY)) * -speedCap);
       Robot.m_drivetrain.rightDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.leftTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY)) * -speedCap);
       }
-
       //Stopping
-
       else
       {
         Robot.m_drivetrain.leftDrive(0);
         Robot.m_drivetrain.rightDrive(0);
       }
-      
+      //JT: As a code clean-up, why not put your turning code into the else statement above? It'll give you smoother controls
       //turning
       
+      //JT: I see what you're doing here, but you could combine this into a single condition by using an OR. Or even better, you could get the absolute value with abs()
+
       if (Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX) >= 0.5)
       {
         Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX));
