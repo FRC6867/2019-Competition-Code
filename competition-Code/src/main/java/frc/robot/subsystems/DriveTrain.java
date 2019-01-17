@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.AnalogInput;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -41,9 +42,14 @@ public class DriveTrain extends Subsystem {
   Encoder leftEncoder = new Encoder(RobotMap.leftDriveEncoderPin1,RobotMap.leftDriveEncoderPin2,false,Encoder.EncodingType.k4X);
   Encoder rightEncoder = new Encoder(RobotMap.rightDriveEncoderPin1,RobotMap.rightDriveEncoderPin2,false,Encoder.EncodingType.k4X);
   
+  //Set up the ultrasonic
+  AnalogInput distanceSensor = new AnalogInput(RobotMap.ultraInPin);
+
+
+
   //JT: NavX needs to be initialized here.
   
-  //JT: Line trackers and ultrasonics should also initialized here.
+
   
   @Override
   public void initDefaultCommand() {

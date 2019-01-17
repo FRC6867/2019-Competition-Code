@@ -20,10 +20,20 @@ public class RobotMap {
   // public static int rightMotor = 2;
 
   //DIO for drive encoders
-  public static int leftDriveEncoderPin1 = 0;
-  public static int leftDriveEncoderPin2 = 1;
-  public static int rightDriveEncoderPin1 = 2;
-  public static int rightDriveEncoderPin2 = 3;
+  //We're using CIMcoders: https://www.andymark.com/products/cimcoder
+  //And the wiring harness is here: https://www.andymark.com/products/encoder-cable-36-in-long-with-single-pin-connectors
+  public static int leftDriveEncoderPin1 = 0; //Blue
+  public static int leftDriveEncoderPin2 = 1; //Yellow
+  public static int rightDriveEncoderPin1 = 2; //Blue
+  public static int rightDriveEncoderPin2 = 3; //Yellow
+
+    //Ultrasonic
+  //We have the Rockwell 874M Proximity Sensor: http://configurator.rockwellautomation.com/#/configurator/873M-D18AV300-D4/summary)
+  //And connected via the yellow cable: http://configurator.rockwellautomation.com/#/configurator/889D-F4AE-2/summary
+  //This needs a 12VDC supply, so it goes to/from the VRM
+  //And this is an analog sensor (it returns a voltage, which we convert to distance, so it goes to the AI pins)
+  public static int ultraOutPin = 1;
+  public static int ultraInPin = 2;
 
   //CAN IDs for drive motors
   public static int FRONT_LEFT_DRIVE_CAN = 11;
@@ -47,3 +57,4 @@ public class RobotMap {
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
 }
+
