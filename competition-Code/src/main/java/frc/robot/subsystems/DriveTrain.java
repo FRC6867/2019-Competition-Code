@@ -44,8 +44,7 @@ public class DriveTrain extends Subsystem {
   
   //Set up the ultrasonic
   AnalogInput distanceSensor = new AnalogInput(RobotMap.ultraInPin);
-
-
+  
 
   //JT: NavX needs to be initialized here.
   
@@ -57,6 +56,12 @@ public class DriveTrain extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 
+  public void init() {
+    // Initialization of motors and sensors for the drive train.
+    distanceSensor.setOversampleBits(4);
+    distanceSensor.setAverageBits(2);
+  }
+
   public void rightDrive(double speed) {
 		frontRightDrive.set(ControlMode.PercentOutput, -speed);
 		backRightDrive.set(ControlMode.PercentOutput, -speed);
@@ -65,6 +70,20 @@ public class DriveTrain extends Subsystem {
 	public void leftDrive(double speed) {
 		frontLeftDrive.set(ControlMode.PercentOutput, speed);
 		backLeftDrive.set(ControlMode.PercentOutput, speed);
+  }
+
+  public double distanceSensorMM() {
+    return distanceSensor.getAverageVoltage() * 1; //JT: We'll need to verify relationship between voltage and distance.
+  }
+
+  public void driveUntilNear(double speed, double distance) {
+    //JT: This void needs to be completed, and we need to put some kind of straightening code in here.
+    while(distanceSensorMM() > distance) {
+      leftDrive(speed);
+      rightDrive(speed);
+    }
+    leftDrive(0);
+    rightDrive(0);
   }
   
 }

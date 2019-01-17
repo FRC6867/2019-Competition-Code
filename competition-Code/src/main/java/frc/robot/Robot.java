@@ -33,6 +33,7 @@ public class Robot extends TimedRobot {
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
+  SendableChooser<Command> m_driveselect = new SendableChooser<>();
 
   /**
    * This function is run when the robot is first started up and should be
@@ -42,10 +43,17 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     m_oi = new OI();
     m_oi.init();
+    m_drivetrain.init();
 
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+
+    //Our drive select chooser
+    m_driveselect.setDefaultOption("Tank Controls", new DriveWithController());
+    m_driveselect.addOption("GTA Controls", new DriveGTA());
+    m_driveselect.addOption("COD Controls", new DriveCOD());
+    SmartDashboard.putData("Driver mode", m_driveselect);
     SmartDashboard.putData(m_drivetrain);
   }
 
@@ -115,18 +123,14 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    // This makes sure that the autonomous stops running when
-    // teleop starts running. If you want the autonomous to
-    // continue until interrupted by another command, remove
+    // This makes sure that the autonomous stops running when teleop starts running.
+    // If you want the autonomous to continue until interrupted by another command, remove
     // this line or comment it out.
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    // Driver Control Function Calls
-    // DriveWithController
-    // DriveGTA
-    // DriveCOD
-    Command driverControls = new DriveCOD();
+
+    Command driverControls = m_driveselect.getSelected();
     driverControls.start();
   
   }
