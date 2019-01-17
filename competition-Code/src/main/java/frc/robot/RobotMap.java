@@ -28,13 +28,19 @@ public class RobotMap {
   public static int rightDriveEncoderPin1 = 2; //Yellow
   public static int rightDriveEncoderPin2 = 3; //Blue
 
-    //Ultrasonic
-  //We have the Rockwell 874M Proximity Sensor: http://configurator.rockwellautomation.com/#/configurator/873M-D18AV300-D4/summary)
+  //Ultrasonic
+  public static int distanceSensorTriggerPin = 4;
+  public static int distanceSensorEchoPin = 5;
+  
+  /*
+  //We're not using this. It needs a 15V power supply that we can't easily do on this year's robot. 
+  //This is for  the 874M Proximity Sensor: http://configurator.rockwellautomation.com/#/configurator/873M-D18AV300-D4/summary)
   //And connected via the yellow cable: http://configurator.rockwellautomation.com/#/configurator/889D-F4AE-2/summary
   //This needs a 12VDC supply, so it goes to/from the VRM
   //And this is an analog sensor (it returns a voltage, which we convert to distance, so it goes to the AI pins)
   public static int ultraOutPin = 1;
   public static int ultraInPin = 2;
+  */
 
   //CAN IDs for drive motors
   public static int FRONT_LEFT_DRIVE_CAN = 11;

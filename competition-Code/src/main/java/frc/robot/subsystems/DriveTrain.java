@@ -9,7 +9,8 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.AnalogInput;
+//import edu.wpi.first.wpilibj.AnalogInput; //This is for taking an analog input off the Rockwell 873M
+import edu.wpi.first.wpilibj.Ultrasonic;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -42,8 +43,12 @@ public class DriveTrain extends Subsystem {
   Encoder leftEncoder = new Encoder(RobotMap.leftDriveEncoderPin1,RobotMap.leftDriveEncoderPin2,false,Encoder.EncodingType.k4X);
   Encoder rightEncoder = new Encoder(RobotMap.rightDriveEncoderPin1,RobotMap.rightDriveEncoderPin2,false,Encoder.EncodingType.k4X);
   
-  //Set up the ultrasonic
-  AnalogInput distanceSensor = new AnalogInput(RobotMap.ultraInPin);
+
+  //Set up the HC-SR04
+  Ultrasonic distanceSensor = new Ultrasonic(RobotMap.distanceSensorTriggerPin, RobotMap.distanceSensorEchoPin);
+
+  //Set up the Rockwell ultrasonic
+  //AnalogInput distanceSensor = new AnalogInput(RobotMap.ultraInPin);
   
 
   //JT: NavX needs to be initialized here.
@@ -54,33 +59,32 @@ public class DriveTrain extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+    distanceSensor.setAutomaticMode(true);
   }
 
   public void init() {
-    // Initialization of motors and sensors for the drive train.
-    distanceSensor.setOversampleBits(4);
-    distanceSensor.setAverageBits(2);
+
   }
 
   public void rightDrive(double speed) {
 		frontRightDrive.set(ControlMode.PercentOutput, speed);
     backRightDrive.set(ControlMode.PercentOutput, speed);
     //Debug: System.out.println("rightEncoder: " + Double.toString(rightEncoder.getRaw()));
+    //Debug: System.out.println("distanceSensor: " + Double.toString(distanceSensor.getRangeMM()));
 	}
 	
 	public void leftDrive(double speed) {
 		frontLeftDrive.set(ControlMode.PercentOutput, -speed);
     backLeftDrive.set(ControlMode.PercentOutput, -speed);
     //Debug: System.out.println("leftEncoder: " + Double.toString(leftEncoder.getRaw()));
+
   }
 
-  public double distanceSensorMM() {
-    return distanceSensor.getAverageVoltage() * 1; //JT: We'll need to verify relationship between voltage and distance.
-  }
+
 
   public void driveUntilNear(double speed, double distance) {
     //JT: This void needs to be completed, and we need to put some kind of straightening code in here.
-    while(distanceSensorMM() > distance) {
+    while(distanceSensor.getRangeMM() > distance) {
       leftDrive(speed);
       rightDrive(speed);
     }
