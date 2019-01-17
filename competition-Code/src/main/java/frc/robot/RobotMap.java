@@ -22,10 +22,11 @@ public class RobotMap {
   //DIO for drive encoders
   //We're using CIMcoders: https://www.andymark.com/products/cimcoder
   //And the wiring harness is here: https://www.andymark.com/products/encoder-cable-36-in-long-with-single-pin-connectors
+  //Left is wired backwards to right because it's spinning in the opposite direction!
   public static int leftDriveEncoderPin1 = 0; //Blue
   public static int leftDriveEncoderPin2 = 1; //Yellow
-  public static int rightDriveEncoderPin1 = 2; //Blue
-  public static int rightDriveEncoderPin2 = 3; //Yellow
+  public static int rightDriveEncoderPin1 = 2; //Yellow
+  public static int rightDriveEncoderPin2 = 3; //Blue
 
     //Ultrasonic
   //We have the Rockwell 874M Proximity Sensor: http://configurator.rockwellautomation.com/#/configurator/873M-D18AV300-D4/summary)

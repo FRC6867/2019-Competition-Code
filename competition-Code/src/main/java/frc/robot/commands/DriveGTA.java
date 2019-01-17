@@ -63,7 +63,7 @@ public class DriveGTA extends Command {
         Robot.m_drivetrain.leftDrive(0);
         Robot.m_drivetrain.rightDrive(0);
       }
-      //JT: As a code clean-up, why not put your turning code into the else statement above? It'll give you smoother controls
+      //JT: As a code clean-up, why not put your turning code into the else statement above? It'll itgive you smoother controls
       //turning
       
       //JT: I see what you're doing here, but you could combine this into a single condition by using an OR. Or even better, you could get the absolute value with abs()

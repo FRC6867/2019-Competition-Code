@@ -63,13 +63,15 @@ public class DriveTrain extends Subsystem {
   }
 
   public void rightDrive(double speed) {
-		frontRightDrive.set(ControlMode.PercentOutput, -speed);
-		backRightDrive.set(ControlMode.PercentOutput, -speed);
+		frontRightDrive.set(ControlMode.PercentOutput, speed);
+    backRightDrive.set(ControlMode.PercentOutput, speed);
+    //Debug: System.out.println("rightEncoder: " + Double.toString(rightEncoder.getRaw()));
 	}
 	
 	public void leftDrive(double speed) {
-		frontLeftDrive.set(ControlMode.PercentOutput, speed);
-		backLeftDrive.set(ControlMode.PercentOutput, speed);
+		frontLeftDrive.set(ControlMode.PercentOutput, -speed);
+    backLeftDrive.set(ControlMode.PercentOutput, -speed);
+    //Debug: System.out.println("leftEncoder: " + Double.toString(leftEncoder.getRaw()));
   }
 
   public double distanceSensorMM() {
@@ -79,6 +81,22 @@ public class DriveTrain extends Subsystem {
   public void driveUntilNear(double speed, double distance) {
     //JT: This void needs to be completed, and we need to put some kind of straightening code in here.
     while(distanceSensorMM() > distance) {
+      leftDrive(speed);
+      rightDrive(speed);
+    }
+    leftDrive(0);
+    rightDrive(0);
+  }
+
+  public void driveForDistance(double speed, double distance) {
+    //JT: This is just a skeleton.
+    //JT: Figure out conversion so we can input value in millimeters and convert it to encoder ticks
+    //JT: There's also no straightening code
+    //JT: And this is a hard take-off + landing so we skid
+    //JT: And we have no way of interrupting it once it takes off.
+    leftEncoder.reset();
+    rightEncoder.reset();
+    while(leftEncoder.getRaw() < distance) {
       leftDrive(speed);
       rightDrive(speed);
     }
