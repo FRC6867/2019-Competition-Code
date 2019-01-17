@@ -122,8 +122,11 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-
-    Command driverControls = new DriveGTA();
+    // Driver Control Function Calls
+    // DriveWithController
+    // DriveGTA
+    // DriveCOD
+    Command driverControls = new DriveCOD();
     driverControls.start();
   
   }

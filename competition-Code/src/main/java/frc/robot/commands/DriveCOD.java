@@ -42,18 +42,18 @@ public class DriveCOD extends Command {
       
     
       //Forward & backward
-      if (Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY) >= 0.5)
+      if ((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY) >= 0.5) || (Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY) <= -0.5))
       {
       Robot.m_drivetrain.leftDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY) + Robot.m_oi.gamepad.getRawAxis(RobotMap.leftStickAxisX)) * speedCap);
       Robot.m_drivetrain.rightDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY) + Robot.m_oi.gamepad.getRawAxis(RobotMap.leftStickAxisX)) * speedCap);
       }
       //turning
-      else if ((Robot.m_oi.gamepad.getRawAxis((RobotMap.leftStickAxisX) >= 0.5) || (Robot.m_oi.gamepad.getRawAxis((RobotMap.leftStickAxisX) <= 0.5))
+      else if ((Robot.m_oi.gamepad.getRawAxis(RobotMap.leftStickAxisX) >= 0.5) || (Robot.m_oi.gamepad.getRawAxis(RobotMap.leftStickAxisX) <= -0.5))
       {
-        Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX));
-        Robot.m_drivetrain.rightDrive(-Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX));  
+        Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.leftStickAxisX));
+        Robot.m_drivetrain.rightDrive(-Robot.m_oi.gamepad.getRawAxis(RobotMap.leftStickAxisX));  
       }
-      //very confused as to why this is underlined?
+      //stopping
       else
       {
         Robot.m_drivetrain.leftDrive(0);
