@@ -28,7 +28,7 @@ public class RobotMap {
   public static int rightDriveEncoderPin1 = 2; //Yellow
   public static int rightDriveEncoderPin2 = 3; //Blue
 
-  //Ultrasonic
+  //Ultrasonic (HC-SR04)
   public static int distanceSensorTriggerPin = 4;
   public static int distanceSensorEchoPin = 5;
   
