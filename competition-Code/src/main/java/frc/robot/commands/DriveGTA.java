@@ -48,25 +48,29 @@ public class DriveGTA extends Command {
       if (Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) >= 0.1)
       {
       //JT: This code is going to have trouble turning. The max value that can go into leftDrive/rightDrive is 1. If the trigger is already at 1 you're already moving at 0.8, so your turn can only add another 0.2
-      Robot.m_drivetrain.leftDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY)) * speedCap);
-      Robot.m_drivetrain.rightDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY)) * speedCap);
+      Robot.m_drivetrain.leftDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX)) * -speedCap);
+      Robot.m_drivetrain.rightDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) -  Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX)) * -speedCap);
       }
     
       //Left trigger to go backward      
       else if (Robot.m_oi.gamepad.getRawAxis(RobotMap.leftTrigger) >= 0.1)
       {
-      Robot.m_drivetrain.leftDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.leftTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY)) * -speedCap);
-      Robot.m_drivetrain.rightDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.leftTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY)) * -speedCap);
+      Robot.m_drivetrain.leftDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.leftTrigger) - Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX)) * speedCap);
+      Robot.m_drivetrain.rightDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.leftTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX)) * speedCap);
       }
       //Stopping
       else
       {
-        Robot.m_drivetrain.leftDrive(0);
-        Robot.m_drivetrain.rightDrive(0);
+        
         if ((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX) >= 0.1) || (Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX) <= -0.1))
           {
-          Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX));
-          Robot.m_drivetrain.rightDrive(-Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX));
+          Robot.m_drivetrain.leftDrive(-Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX));
+          Robot.m_drivetrain.rightDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX));
+          }
+          else
+          {
+            Robot.m_drivetrain.leftDrive(0);
+            Robot.m_drivetrain.rightDrive(0);    
           }
       }
     }
