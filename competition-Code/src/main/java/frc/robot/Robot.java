@@ -16,6 +16,7 @@ import frc.robot.commands.*;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.*;
 import frc.robot.OI;
+import frc.robot.subsystems.PixyCamera;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,6 +29,7 @@ public class Robot extends TimedRobot {
   Command driverControls;
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static DriveTrain m_drivetrain = new DriveTrain();
+  public static PixyCamera m_pixycam = new PixyCamera();
   public static OI m_oi;
 
 
@@ -142,7 +144,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
 
     Scheduler.getInstance().run();
-
+    m_pixycam.centerOnObject();
     //JT: Just in case, if for some reason we lose control this restarts the control command
     /*
     if (Robot.m_drivetrain.getCurrentCommand() == null) {
