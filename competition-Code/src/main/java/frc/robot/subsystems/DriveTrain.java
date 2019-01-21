@@ -37,7 +37,10 @@ public class DriveTrain extends Subsystem {
   public VictorSPX frontLeftDrive = new VictorSPX(RobotMap.FRONT_LEFT_DRIVE_CAN);
   public VictorSPX backLeftDrive = new VictorSPX(RobotMap.BACK_LEFT_DRIVE_CAN);
   public VictorSPX frontRightDrive = new VictorSPX(RobotMap.FRONT_RIGHT_DRIVE_CAN);
-  public VictorSPX backRightDrive = new VictorSPX(RobotMap.BACK_RIGHT_DRIVE_CAN);   
+  public VictorSPX backRightDrive = new VictorSPX(RobotMap.BACK_RIGHT_DRIVE_CAN);
+  //climb motors
+  public VictorSPX climbMotorL = new VictorSPX(RobotMap.CLIMB_MOTORL_CAN);   
+  public VictorSPX climbMotorR = new VictorSPX(RobotMap.CLIMB_MOTORR_CAN);   
 
   //Set up drive encoders            
   Encoder leftEncoder = new Encoder(RobotMap.leftDriveEncoderPin1,RobotMap.leftDriveEncoderPin2,false,Encoder.EncodingType.k4X);
@@ -78,6 +81,10 @@ public class DriveTrain extends Subsystem {
     backLeftDrive.set(ControlMode.PercentOutput, -speed);
     //Debug: System.out.println("leftEncoder: " + Double.toString(leftEncoder.getRaw()));
 
+  }
+  public void climbMotor(double speed) {
+    climbMotorL.set(ControlMode.PercentOutput, speed);
+    climbMotorR.set(ControlMode.PercentOutput, -speed);
   }
 
 

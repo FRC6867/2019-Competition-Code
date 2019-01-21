@@ -18,10 +18,10 @@ import frc.robot.RobotMap;
 /**
  * This command gives basic drive controls to the user through a two-stick gamepad.
  */
-public class DriveWithController extends Command {
+public class ClimbTest extends Command {
 double speed = 1;
 
-  public DriveWithController() {
+  public ClimbTest() {
   // Use requires() here to declare subsystem dependencies
   requires(Robot.m_drivetrain);
   }
@@ -35,19 +35,30 @@ double speed = 1;
   @Override
   protected void execute() {
       //JT: This is where the driver code is actually going to go!
+      //im aware 100% speed is not ideal but brian wanted it for testing purposes for now
       if(Robot.m_oi.gamepad.getRawButton(RobotMap.a) == true)
       {
-        speed = 0.5;
+       speed = 0.5;
       }
       else if(Robot.m_oi.gamepad.getRawButton(RobotMap.b) == true)
       {
-        speed = 0.8;
+       speed = 1;
+      }
+      
+      if(Robot.m_oi.gamepad.getRawButton(RobotMap.rightBumper) == true)
+      {
+       Robot.m_drivetrain.climbMotor(speed);
+      }
+      else if(Robot.m_oi.gamepad.getRawButton(RobotMap.leftBumper) == true)
+      {
+      Robot.m_drivetrain.climbMotor(-speed);
       }
       else
       {
       Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.leftStickAxisY) * speed);
       Robot.m_drivetrain.rightDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY) * speed);
-      } 
+      Robot.m_drivetrain.climbMotor(0);
+    } 
 
   }
 
