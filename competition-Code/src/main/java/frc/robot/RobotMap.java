@@ -47,6 +47,10 @@ public class RobotMap {
   public static int BACK_LEFT_DRIVE_CAN = 10;
   public static int FRONT_RIGHT_DRIVE_CAN = 21;
   public static int BACK_RIGHT_DRIVE_CAN = 20;
+  //CAN IDs for CLIMB motors
+  public static int CLIMB_MOTORL_CAN = 30;
+  public static int CLIMB_MOTORR_CAN = 31;
+
  
   // Joystick Mapping
   // Y-Axis
@@ -58,6 +62,14 @@ public class RobotMap {
   // Triggers
   public static int rightTrigger = 3;
   public static int leftTrigger = 2;
+  // Bumpers
+  public static int rightBumper = 6;
+  public static int leftBumper = 5;
+  // Buttons
+  public static int a = 1;
+  public static int b = 2;
+  public static int x = 3;
+  public static int y = 4;
 
   // If you are using multiple modules, make sure to define both the port
   // number and the module. For example you with a rangefinder:
