@@ -144,6 +144,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
 
     Scheduler.getInstance().run();
+    m_pixycam.cameraLEDRing.set(true);
     m_pixycam.centerOnObject();
     //JT: Just in case, if for some reason we lose control this restarts the control command
     /*

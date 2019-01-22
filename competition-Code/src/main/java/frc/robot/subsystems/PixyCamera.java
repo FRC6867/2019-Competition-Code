@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.Solenoid; //JT: The green LED ring needs a 12V power supply. The PCM has 12V channels. Therefore...
 import frc.robot.subsystems.PixyCamera;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.RobotMap;
@@ -18,6 +19,7 @@ import frc.robot.RobotMap;
 public class PixyCamera extends Subsystem {
 	M_I2C i2c = new M_I2C();//setup the i2c interface
 	PixyPacket pkt = i2c.getPixy();//create a pixy packet to hold data
+	public Solenoid cameraLEDRing = new Solenoid(7);
 
 	@Override
 	public void initDefaultCommand() {
