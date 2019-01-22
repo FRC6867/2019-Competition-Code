@@ -1,5 +1,6 @@
 /*
- * We are heavily indebted to FRC 5188 for this. We've basically just adapted their code to our project
+ * We are indebted to FRC 5188 for this. We've really just adapted their code to our project
+ * https://github.com/FRC5188/ArduinoPixyAndRoboRIO 
  */  
 
 package frc.robot.subsystems;
