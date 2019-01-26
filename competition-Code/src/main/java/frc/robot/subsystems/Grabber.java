@@ -7,51 +7,33 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SolenoidBase;
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
-import frc.robot.Robot;
 
 /**
- * An example command.  You can replace me with your own command.
+ * An example subsystem.  You can replace me with your own Subsystem.
  */
-public class Grabber extends Command {
-    public Grabber() {
-    // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_subsystem);
-    DoubleSolenoid SolenDouble = new SolenoidBase(){
-
-                public void initSendable(SendableBuilder builder) {
-                SolenDouble.set(DoubleSolenoid.Value.kOff);
-                SolenDouble.set(DoubleSolenoid.Value.kForward);
-                SolenDouble.set(DoubleSolenoid.Value.kReverse);   
-            }
-        }
-
-  // Called just before this Command runs the first time
-  @Override
-  protected void initialize() {
+public class Grabber extends Subsystem {
+  // Put methods for controlling this subsystem
+  // here. Call these from Commands.
+  
+  public DoubleSolenoid grab = new DoubleSolenoid(1,2);
+// not so sure that this is in the right place. ^^^^  
+  public void Grabber() {
+    DoubleSolenoid grab = new DoubleSolenoid(1,2);
+    grab.set(DoubleSolenoid.Value.kOff);
+    grab.set(DoubleSolenoid.Value.kForward);
+    grab.set(DoubleSolenoid.Value.kReverse);
   }
-
-  // Called repeatedly when this Command is scheduled to run
+  
+  
+  
   @Override
-  protected void execute() {
-  }
-
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
-    return false;
-  }
-
-  // Called once after isFinished returns true
-  @Override
-  protected void end() {
-  }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
+  public void initDefaultCommand() {
+    // Set the default command for a subsystem here.
+    // setDefaultCommand(new MySpecialCommand());
   }
 }

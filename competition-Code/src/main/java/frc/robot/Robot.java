@@ -31,7 +31,7 @@ public class Robot extends TimedRobot {
   public static DriveTrain m_drivetrain = new DriveTrain();
   public static PixyCamera m_pixycam = new PixyCamera();
   public static OI m_oi;
-
+  public static Grabber m_grabber = new Grabber();
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -132,7 +132,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
 
-    Command driverControls = new DriveWithController();
+    Command driverControls = new SolenoidTest();
     driverControls.start();
   
   }
