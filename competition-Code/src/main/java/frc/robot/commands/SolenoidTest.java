@@ -14,6 +14,7 @@ import frc.robot.Robot;
 import frc.robot.OI;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.RobotMap;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 /**
  * This command gives basic drive controls to the user through a two-stick gamepad.
@@ -51,7 +52,15 @@ double speed = 1;
 
       if(Robot.m_oi.gamepad.getRawButton(RobotMap.x) == true)
       {
-        m_grabber.grabberPiston.set(DoubleSolenoid.Value.kForward);
+        Robot.m_grabber.grab.set(DoubleSolenoid.Value.kForward);
+      }
+      else if(Robot.m_oi.gamepad.getRawButton(RobotMap.y) == true)
+      {
+        Robot.m_grabber.grab.set(DoubleSolenoid.Value.kReverse);
+      }
+      else
+      {
+        Robot.m_grabber.grab.set(DoubleSolenoid.Value.kOff);
       }
   }
 
