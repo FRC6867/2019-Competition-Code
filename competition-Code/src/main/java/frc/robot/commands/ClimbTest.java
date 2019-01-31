@@ -36,11 +36,11 @@ double speed = 1;
   protected void execute() {
       //JT: This is where the driver code is actually going to go!
       //im aware 100% speed is not ideal but brian wanted it for testing purposes for now
-      if(Robot.m_oi.gamepad.getRawButton(RobotMap.a) == true)
+      if(Robot.m_oi.gamepad.getRawButton(RobotMap.aButton) == true)
       {
        speed = 0.5;
       }
-      else if(Robot.m_oi.gamepad.getRawButton(RobotMap.b) == true)
+      else if(Robot.m_oi.gamepad.getRawButton(RobotMap.bButton) == true)
       {
        speed = 1;
       }

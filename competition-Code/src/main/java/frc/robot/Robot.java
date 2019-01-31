@@ -14,6 +14,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.PixyCamera;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.PneumaticSubsystem;
 import frc.robot.subsystems.*;
 import frc.robot.OI;
 import frc.robot.subsystems.PixyCamera;
@@ -30,6 +33,8 @@ public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static DriveTrain m_drivetrain = new DriveTrain();
   public static PixyCamera m_pixycam = new PixyCamera();
+  public static IntakeSubsystem m_intake = new IntakeSubsystem();
+  public static PneumaticSubsystem m_pneumatics = new PneumaticSubsystem();
   public static OI m_oi;
 
 
@@ -46,6 +51,7 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
     m_oi.init();
     m_drivetrain.init();
+    m_pneumatics.init();
 
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());

@@ -15,6 +15,7 @@ import frc.robot.OI;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.RobotMap;
 
+
 /**
  * This command gives basic drive controls to the user through a two-stick gamepad.
  */
@@ -35,19 +36,29 @@ double speed = 1;
   @Override
   protected void execute() {
       //JT: This is where the driver code is actually going to go!
-      if(Robot.m_oi.gamepad.getRawButton(RobotMap.a) == true)
-      {
-        speed = 0.5;
+
+      //Intake Klaw control
+      if(Robot.m_oi.gamepad.getRawButton(RobotMap.aButton)) {
+        Robot.m_intake.openKlaw();
       }
-      else if(Robot.m_oi.gamepad.getRawButton(RobotMap.b) == true)
-      {
-        speed = 0.8;
+      else if(Robot.m_oi.gamepad.getRawButton(RobotMap.bButton)) {
+        Robot.m_intake.closeKlaw();
       }
-      else
-      {
+
+      //Intake L/R slider control
+      if(Robot.m_oi.gamepad.getRawButton(RobotMap.leftBumper)) {
+        Robot.m_intake.slideToTheLeft();
+      }
+      else if(Robot.m_oi.gamepad.getRawButton(RobotMap.rightBumper)) {
+        Robot.m_intake.slideToTheRight();
+      }
+      else {
+        Robot.m_intake.takeItBackNowYAll(); //If no input stop the motor
+      }
+      
+      //Simple tank code
       Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.leftStickAxisY) * speed);
       Robot.m_drivetrain.rightDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY) * speed);
-      } 
 
   }
 
