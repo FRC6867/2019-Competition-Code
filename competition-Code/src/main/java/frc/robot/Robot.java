@@ -20,6 +20,8 @@ import frc.robot.subsystems.PneumaticSubsystem;
 import frc.robot.subsystems.*;
 import frc.robot.OI;
 import frc.robot.subsystems.PixyCamera;
+import edu.wpi.first.wpilibj.CameraServer;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -64,6 +66,9 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Driver mode", m_driveselect);
     SmartDashboard.putNumber("Throttle", RobotMap.masterThrottle);
     SmartDashboard.putData(m_drivetrain);
+
+    CameraServer.getInstance().startAutomaticCapture();
+
   }
 
   /**
