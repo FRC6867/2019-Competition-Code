@@ -63,6 +63,7 @@ public class Robot extends TimedRobot {
     m_driveselect.setDefaultOption("Tank Controls", new DriveWithController());
     m_driveselect.addOption("GTA Controls", new DriveGTA());
     m_driveselect.addOption("COD Controls", new DriveCOD());
+    m_driveselect.addOption("TahirGTA Controls", new DriveGTAInverted());
     SmartDashboard.putData("Driver mode", m_driveselect);
     SmartDashboard.putNumber("Throttle", RobotMap.masterThrottle);
     SmartDashboard.putData(m_drivetrain);
