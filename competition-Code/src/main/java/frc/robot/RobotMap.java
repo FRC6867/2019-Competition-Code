@@ -19,6 +19,9 @@ public class RobotMap {
   // public static int leftMotor = 1;
   // public static int rightMotor = 2;
 
+  //These aren't wiring settings, but they are common values that we play with all the time. They're going here.
+  public static double masterThrottle = 0.7; //This is our global speed throttler. Adjusting this will make everything slower/faster. 0.7 is a good default for comps
+
   //DIO for drive encoders
   //We're using CIMcoders: https://www.andymark.com/products/cimcoder
   //And the wiring harness is here: https://www.andymark.com/products/encoder-cable-36-in-long-with-single-pin-connectors

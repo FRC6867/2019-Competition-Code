@@ -27,17 +27,17 @@ public class DriveTrain extends Subsystem {
 
 
   //JT: Which drive base are we on? Comment out depending on which one we want
-  /*
-  public TalonSRX frontLeftDrive = new TalonSRX(RobotMap.FRONT_LEFT_DRIVE_CAN);
-  public TalonSRX backLeftDrive = new TalonSRX(RobotMap.BACK_LEFT_DRIVE_CAN);
-  public TalonSRX frontRightDrive = new TalonSRX(RobotMap.FRONT_RIGHT_DRIVE_CAN);
-  public TalonSRX backRightDrive = new TalonSRX(RobotMap.BACK_RIGHT_DRIVE_CAN);   
-  */
-
+  //
+  //public TalonSRX frontLeftDrive = new TalonSRX(RobotMap.FRONT_LEFT_DRIVE_CAN);
+  //public TalonSRX backLeftDrive = new TalonSRX(RobotMap.BACK_LEFT_DRIVE_CAN);
+  //public TalonSRX frontRightDrive = new TalonSRX(RobotMap.FRONT_RIGHT_DRIVE_CAN);
+  //public TalonSRX backRightDrive = new TalonSRX(RobotMap.BACK_RIGHT_DRIVE_CAN);   
+  
   public VictorSPX frontLeftDrive = new VictorSPX(RobotMap.FRONT_LEFT_DRIVE_CAN);
   public VictorSPX backLeftDrive = new VictorSPX(RobotMap.BACK_LEFT_DRIVE_CAN);
   public VictorSPX frontRightDrive = new VictorSPX(RobotMap.FRONT_RIGHT_DRIVE_CAN);
   public VictorSPX backRightDrive = new VictorSPX(RobotMap.BACK_RIGHT_DRIVE_CAN);
+
   //climb motors
   public VictorSPX climbMotorL = new VictorSPX(RobotMap.CLIMB_MOTORL_CAN);   
   public VictorSPX climbMotorR = new VictorSPX(RobotMap.CLIMB_MOTORR_CAN);   
@@ -70,15 +70,15 @@ public class DriveTrain extends Subsystem {
   }
 
   public void rightDrive(double speed) {
-		frontRightDrive.set(ControlMode.PercentOutput, speed);
-    backRightDrive.set(ControlMode.PercentOutput, speed);
+		frontRightDrive.set(ControlMode.PercentOutput, speed * RobotMap.masterThrottle);
+    backRightDrive.set(ControlMode.PercentOutput, speed * RobotMap.masterThrottle);
     //Debug: System.out.println("rightEncoder: " + Double.toString(rightEncoder.getRaw()));
     //Debug: System.out.println("distanceSensor: " + Double.toString(distanceSensor.getRangeMM()));
 	}
 	
 	public void leftDrive(double speed) {
-		frontLeftDrive.set(ControlMode.PercentOutput, -speed);
-    backLeftDrive.set(ControlMode.PercentOutput, -speed);
+		frontLeftDrive.set(ControlMode.PercentOutput, -speed * RobotMap.masterThrottle);
+    backLeftDrive.set(ControlMode.PercentOutput, -speed * RobotMap.masterThrottle);
     //Debug: System.out.println("leftEncoder: " + Double.toString(leftEncoder.getRaw()));
 
   }

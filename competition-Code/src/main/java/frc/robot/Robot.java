@@ -62,6 +62,7 @@ public class Robot extends TimedRobot {
     m_driveselect.addOption("GTA Controls", new DriveGTA());
     m_driveselect.addOption("COD Controls", new DriveCOD());
     SmartDashboard.putData("Driver mode", m_driveselect);
+    SmartDashboard.putNumber("Throttle", RobotMap.masterThrottle);
     SmartDashboard.putData(m_drivetrain);
   }
 
@@ -137,8 +138,10 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-
-    Command driverControls = new DriveWithController();
+    
+    Command driverControls = m_driveselect.getSelected();
+    RobotMap.masterThrottle = SmartDashboard.getNumber("Throttle", 0.7); //Get value for the throttle. Take 0.7 as a default.
+    //Command driverControls = new DriveWithController();
     driverControls.start();
   
   }
@@ -152,13 +155,13 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     m_pixycam.cameraLEDRing.set(true); //Turn on LED ring. This should be tied to a button later.
     m_pixycam.centerOnObject();
+
     //JT: Just in case, if for some reason we lose control this restarts the control command
-    /*
     if (Robot.m_drivetrain.getCurrentCommand() == null) {
       Scheduler.getInstance().add(new DriveWithController());
     }
 
-  */
+  
     /*
     m_drivetrain.rightDrive(0.5);
     m_drivetrain.leftDrive(0.5);

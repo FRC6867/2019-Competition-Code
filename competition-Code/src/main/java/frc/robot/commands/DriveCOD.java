@@ -35,17 +35,12 @@ public class DriveCOD extends Command {
   @Override
   protected void execute() {
       //JT: This is where the driver code is actually going to go!
-      
-      //speedCap
-      //JT: I know this is a temp until we put a master variable somewhere (in RobotMap or in the subsystem?) but this isn't a helpful variable name. Let's call it speedThrottle or speedLimit or speedReducer or speedCap or something like that
-      double speedCap = 0.8;
-      
-    
+        
       //Forward & backward
       if ((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY) >= 0.5) || (Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY) <= -0.5))
       {
-      Robot.m_drivetrain.leftDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY) - Robot.m_oi.gamepad.getRawAxis(RobotMap.leftStickAxisX)) * speedCap);
-      Robot.m_drivetrain.rightDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY) + Robot.m_oi.gamepad.getRawAxis(RobotMap.leftStickAxisX)) * speedCap);
+      Robot.m_drivetrain.leftDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY) - Robot.m_oi.gamepad.getRawAxis(RobotMap.leftStickAxisX)));
+      Robot.m_drivetrain.rightDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY) + Robot.m_oi.gamepad.getRawAxis(RobotMap.leftStickAxisX)));
       }
       //turning
       else if ((Robot.m_oi.gamepad.getRawAxis(RobotMap.leftStickAxisX) >= 0.5) || (Robot.m_oi.gamepad.getRawAxis(RobotMap.leftStickAxisX) <= -0.5))

@@ -35,28 +35,19 @@ public class DriveGTA extends Command {
   @Override
   protected void execute() {
       //JT: This is where the driver code is actually going to go!
-      
-      //speedCap sets a maximum speed
-      //JT: Should we move speedCap to a central location?
-      // sure why not but im not to sure as to where to move it where it will be able to be accessed by all of our functions
-      double speedCap = 0.8;
-      
-    
-      //JT: Adding a deadzone is a good idea, but 0.5 is huge! That's half the range! What if we want to go slow?
-      
+            
       //Right trigger to go forward
       if (Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) >= 0.1)
       {
-      //JT: This code is going to have trouble turning. The max value that can go into leftDrive/rightDrive is 1. If the trigger is already at 1 you're already moving at 0.8, so your turn can only add another 0.2
-      Robot.m_drivetrain.leftDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX)) * -speedCap);
-      Robot.m_drivetrain.rightDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) -  Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX)) * -speedCap);
+      Robot.m_drivetrain.leftDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX)));
+      Robot.m_drivetrain.rightDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) -  Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX)));
       }
     
       //Left trigger to go backward      
       else if (Robot.m_oi.gamepad.getRawAxis(RobotMap.leftTrigger) >= 0.1)
       {
-      Robot.m_drivetrain.leftDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.leftTrigger) - Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX)) * speedCap);
-      Robot.m_drivetrain.rightDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.leftTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX)) * speedCap);
+      Robot.m_drivetrain.leftDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.leftTrigger) - Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX)));
+      Robot.m_drivetrain.rightDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.leftTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX)));
       }
       //Stopping
       else

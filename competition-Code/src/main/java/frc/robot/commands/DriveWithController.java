@@ -20,7 +20,6 @@ import frc.robot.RobotMap;
  * This command gives basic drive controls to the user through a two-stick gamepad.
  */
 public class DriveWithController extends Command {
-double speed = 1;
 
   public DriveWithController() {
   // Use requires() here to declare subsystem dependencies
@@ -57,8 +56,8 @@ double speed = 1;
       }
       
       //Simple tank code
-      Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.leftStickAxisY) * speed);
-      Robot.m_drivetrain.rightDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY) * speed);
+      Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.leftStickAxisY));
+      Robot.m_drivetrain.rightDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY));
 
   }
 
