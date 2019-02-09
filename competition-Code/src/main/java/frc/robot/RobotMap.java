@@ -21,6 +21,7 @@ public class RobotMap {
 
   //These aren't wiring settings, but they are common values that we play with all the time. They're going here.
   public static double masterThrottle = 0.7; //This is our global speed throttler. Adjusting this will make everything slower/faster. 0.7 is a good default for comps
+  public static double cutThrottle = 0.5; //This is a multiplier that lets us cut speed on the fly for fine control. Make it bigger to get a larger reduction
 
   //DIO for drive encoders
   //We're using CIMcoders: https://www.andymark.com/products/cimcoder
@@ -77,6 +78,8 @@ public class RobotMap {
   public static int bButton = 2;
   public static int xButton = 3;
   public static int yButton = 4;
+  public static int leftStickClick = 9;
+  public static int rightStickClick = 10;
 
   // If you are using multiple modules, make sure to define both the port
   // number and the module. For example you with a rangefinder:

@@ -21,6 +21,7 @@ public class IntakeSubsystem extends Subsystem {
   // here. Call these from Commands.
   public VictorSPX intakeLR = new VictorSPX(RobotMap.INTAKE_LR_CAN); // Left-Right movement of intake slider
   public DoubleSolenoid krabKlaw = new DoubleSolenoid(1,2); //The one double solenoid is connected to two cylinders via Y-splitters
+  public DoubleSolenoid falconPunch = new DoubleSolenoid(3,4); //The one double solenoid is connected to two cylinders via Y-splitters
 
   public static double intakeMotorSpeed = 0.2; //Move this into RobotMap later. Or move it to the Dashboard?
 
@@ -50,5 +51,13 @@ public class IntakeSubsystem extends Subsystem {
   
   public void takeItBackNowYAll() {
     intakeLR.set(ControlMode.PercentOutput, 0);
-	}
+  }
+
+  public void falconPunchOut() {
+    falconPunch.set(DoubleSolenoid.Value.kForward);
+  }
+
+  public void falconPunchIn() {
+    falconPunch.set(DoubleSolenoid.Value.kReverse);
+  }
 }

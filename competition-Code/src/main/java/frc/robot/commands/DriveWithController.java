@@ -44,6 +44,14 @@ public class DriveWithController extends Command {
         Robot.m_intake.closeKlaw();
       }
 
+      //Falcon Punch control
+      if(Robot.m_oi.gamepad.getRawButton(RobotMap.xButton)) {
+        Robot.m_intake.falconPunchOut();
+      }
+      else if(Robot.m_oi.gamepad.getRawButton(RobotMap.yButton)) {
+        Robot.m_intake.falconPunchIn();
+      }
+
       //Intake L/R slider control
       if(Robot.m_oi.gamepad.getRawButton(RobotMap.leftBumper)) {
         Robot.m_intake.slideToTheLeft();
@@ -55,10 +63,23 @@ public class DriveWithController extends Command {
         Robot.m_intake.takeItBackNowYAll(); //If no input stop the motor
       }
       
-      //Simple tank code
-      Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.leftStickAxisY));
-      Robot.m_drivetrain.rightDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY));
+      //Tank code. If the stick is clicked it'll apply the cut.
+      if(Robot.m_oi.gamepad.getRawButton(RobotMap.leftStickClick)) {
+        Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.leftStickAxisY) * RobotMap.cutThrottle);
+      }
+      else {
+        Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.leftStickAxisY));
+      }
+      if(Robot.m_oi.gamepad.getRawButton(RobotMap.rightStickClick)) {
+        Robot.m_drivetrain.rightDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.leftStickAxisY) * RobotMap.cutThrottle);
+      }
+      else {
+        Robot.m_drivetrain.rightDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisY));
+      }
 
+
+          
+ 
   }
 
   // Make this return true when this Command no longer needs to run execute()

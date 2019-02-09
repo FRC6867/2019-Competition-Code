@@ -39,26 +39,25 @@ public class DriveGTA extends Command {
       //Right trigger to go forward
       if (Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) >= 0.1)
       {
-      Robot.m_drivetrain.leftDrive(-(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX)));
-      Robot.m_drivetrain.rightDrive(-(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) -  Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX)));
+      Robot.m_drivetrain.leftDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX)));
+      Robot.m_drivetrain.rightDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) -  Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX)));
       }
     
       //Left trigger to go backward      
       else if (Robot.m_oi.gamepad.getRawAxis(RobotMap.leftTrigger) >= 0.1)
       {
-      Robot.m_drivetrain.leftDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.leftTrigger) - Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX)));
-      Robot.m_drivetrain.rightDrive((Robot.m_oi.gamepad.getRawAxis(RobotMap.leftTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX)));
+      Robot.m_drivetrain.leftDrive(-(Robot.m_oi.gamepad.getRawAxis(RobotMap.leftTrigger) - Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX)));
+      Robot.m_drivetrain.rightDrive(-(Robot.m_oi.gamepad.getRawAxis(RobotMap.leftTrigger) + Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX)));
       }
       //Stopping
       else
-      {
-        
+      { 
         if ((Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX) >= 0.1) || (Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX) <= -0.1))
           {
           Robot.m_drivetrain.leftDrive(-Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX));
           Robot.m_drivetrain.rightDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightStickAxisX));
           }
-          else
+        else
           {
             Robot.m_drivetrain.leftDrive(0);
             Robot.m_drivetrain.rightDrive(0);    
