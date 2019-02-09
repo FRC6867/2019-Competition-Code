@@ -37,7 +37,7 @@ public class DriveWithController extends Command {
       //JT: This is where the driver code is actually going to go!
 
       //Intake Klaw control
-      if(Robot.m_oi.gamepad.getRawButton(RobotMap.aButton)) {
+      if(Robot.m_oi.gamepad.getRawButton(RobotMap.xButton)) {
         Robot.m_intake.openKlaw();
       }
       else if(Robot.m_oi.gamepad.getRawButton(RobotMap.bButton)) {
@@ -45,10 +45,10 @@ public class DriveWithController extends Command {
       }
 
       //Falcon Punch control
-      if(Robot.m_oi.gamepad.getRawButton(RobotMap.xButton)) {
+      if(Robot.m_oi.gamepad.getRawButton(RobotMap.yButton)) {
         Robot.m_intake.falconPunchOut();
       }
-      else if(Robot.m_oi.gamepad.getRawButton(RobotMap.yButton)) {
+      else if(Robot.m_oi.gamepad.getRawButton(RobotMap.aButton)) {
         Robot.m_intake.falconPunchIn();
       }
 

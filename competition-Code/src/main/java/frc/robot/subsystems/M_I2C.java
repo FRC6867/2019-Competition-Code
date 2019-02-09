@@ -42,15 +42,15 @@ public class M_I2C extends Subsystem {
 											//and adds it as a new element in the array
 		PixyPacket pkt = new PixyPacket();  //creates a new packet to hold the data 
 		if(info[0].equals("none") || info[0].equals("")){//checks to make sure there is data 
-			pkt.x = -1;//the x val will never be -1 so we can text later in code to make sure 
+			pkt.x1 = -1;//the x val will never be -1 so we can text later in code to make sure 
 					   //there is data
-			pkt.y = -1;
-			pkt.area = -1;
+			pkt.x2 = -1;
+			pkt.midline = -1;
 		}
 		else if(info.length == 3){//if there is an x, y, and area value the length equals 3
-			pkt.x = Double.parseDouble(info[0]);//set x
-			pkt.y = Double.parseDouble(info[1]);//set y
-			pkt.area = Double.parseDouble(info[2]);//set area
+			pkt.x1 = Double.parseDouble(info[0]);//set x1
+			pkt.x2 = Double.parseDouble(info[1]);//set x2
+			pkt.midline = Double.parseDouble(info[2]);//set the midline
 		}
 		return pkt;
 	}

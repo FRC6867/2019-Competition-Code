@@ -66,6 +66,7 @@ public class Robot extends TimedRobot {
     m_driveselect.addOption("TahirGTA Controls", new DriveGTAInverted());
     SmartDashboard.putData("Driver mode", m_driveselect);
     SmartDashboard.putNumber("Throttle", RobotMap.masterThrottle);
+    SmartDashboard.putNumber("Krab Speed", RobotMap.krabSpeed);
     SmartDashboard.putData(m_drivetrain);
 
     CameraServer.getInstance().startAutomaticCapture();
@@ -147,6 +148,7 @@ public class Robot extends TimedRobot {
     
     Command driverControls = m_driveselect.getSelected();
     RobotMap.masterThrottle = SmartDashboard.getNumber("Throttle", 0.7); //Get value for the throttle. Take 0.7 as a default.
+    RobotMap.krabSpeed = SmartDashboard.getNumber("Krab Speed", 0.3); //Default speed for the krab is 0.3
     //Command driverControls = new DriveWithController();
     driverControls.start();
   

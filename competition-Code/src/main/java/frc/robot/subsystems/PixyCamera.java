@@ -30,30 +30,32 @@ public class PixyCamera extends Subsystem {
   
 	public void centerOnObject(){
 		//JT: I'm not sure if I'd rather have this in a separate command, but it works for now.
-		//System.out.println("Center on Object is called");
+		System.out.println("Center on Object is called");
 		pkt = i2c.getPixy();
-		if(pkt.x != -1){//if data is exist
-			//System.out.println("I see something");
-			if(pkt.x < .48 || pkt.x > .52){
-				//and the 'object', whatever it may be is not in the center
-				//the code on the arduino decides what object to send
-				while(pkt.x < .48 || pkt.x > .52){ //Sets a deadzone for "centered enough"
-					
-					if(pkt.x < .48){    //if its on the left side of robot, turn left	
-						Robot.m_drivetrain.leftDrive(0.20);//this is our left side of tank drive
-						Robot.m_drivetrain.rightDrive(-0.20);//you drive code might differ
+		if(pkt.x1 != -1){//if data is exist
+			System.out.print("Targets acquired. Midline @ ");
+			System.out.println(pkt.midline);
+			if(pkt.midline  < .45 || pkt.midline > .55){
+				//We have some play. We might make the deadzone more generous
+				while(pkt.midline < .45 || pkt.midline > .55){ //As long as we're off-center
+					if(pkt.midline < .45){    //if its on the left side of robot, turn left	
+						Robot.m_drivetrain.leftDrive(0.20);//For testing, run left side if midline is on left side
+						Robot.m_drivetrain.rightDrive(0);
+						//Robot.m_intake.slideToTheRight(RobotMap.krabSpeed);
 					}
-					if(pkt.x > .52){    //if its on the right side of robot, turn right	
-						Robot.m_drivetrain.leftDrive(-0.20);
-						Robot.m_drivetrain.rightDrive(0.20);	
+					if(pkt.midline > .55){    //if its on the right side of robot, turn right	
+						Robot.m_drivetrain.leftDrive(0);
+						Robot.m_drivetrain.rightDrive(0.20);
+						//Robot.m_intake.slideToTheLeft(RobotMap.krabSpeed);
 					}
-					if(pkt.y == -1)//Restart if ball lost during turn
+					if(pkt.midline == -1) {//If we lose the targets we should stop.
 						break;
+					}
 					pkt = i2c.getPixy();//refresh the data
-					System.out.println("XPos: " + pkt.x);//print the data just to see
+					System.out.println("Midline: " + pkt.midline);//print the data just to see
 				}
-
 			}
+			Robot.m_intake.takeItBackNowYAll(); //And turn off the slider when we're done.
 	}
 }
 

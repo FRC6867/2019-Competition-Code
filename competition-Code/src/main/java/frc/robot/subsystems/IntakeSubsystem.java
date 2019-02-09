@@ -42,11 +42,11 @@ public class IntakeSubsystem extends Subsystem {
   }
 
   public void slideToTheLeft() {
-		intakeLR.set(ControlMode.PercentOutput, intakeMotorSpeed);
+		intakeLR.set(ControlMode.PercentOutput, RobotMap.krabSpeed);
   }
   
   public void slideToTheRight() {
-		intakeLR.set(ControlMode.PercentOutput, -intakeMotorSpeed);
+		intakeLR.set(ControlMode.PercentOutput, -RobotMap.krabSpeed);
   }
   
   public void takeItBackNowYAll() {
