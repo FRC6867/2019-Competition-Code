@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.Joystick;
 public class OI {
 
   public static Joystick gamepad;
+  public static Joystick operator;
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.
@@ -45,7 +46,8 @@ public class OI {
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
   public void init() {
-    gamepad = new Joystick(0); //1 corresponds to the USB port
+    gamepad = new Joystick(0); //0 corresponds to the USB port
+    operator = new Joystick(1);
 
   }
 

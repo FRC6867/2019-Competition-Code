@@ -12,6 +12,7 @@ import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 /**
  * This subsystem (belovedly known as our Krab Klaw) has the Left/Right slider and the claw mechanism.
@@ -19,7 +20,8 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 public class IntakeSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public VictorSPX intakeLR = new VictorSPX(RobotMap.INTAKE_LR_CAN); // Left-Right movement of intake slider
+  //public VictorSPX intakeLR = new VictorSPX(RobotMap.INTAKE_LR_CAN); // Left-Right movement of intake slider
+  public TalonSRX intakeLR = new TalonSRX(RobotMap.INTAKE_LR_CAN); // And we're actually on a Talon now.
   public DoubleSolenoid krabKlaw = new DoubleSolenoid(1,2); //The one double solenoid is connected to two cylinders via Y-splitters
   public DoubleSolenoid falconPunch = new DoubleSolenoid(3,4); //The one double solenoid is connected to two cylinders via Y-splitters
 

@@ -67,11 +67,28 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Driver mode", m_driveselect);
     SmartDashboard.putNumber("Throttle", RobotMap.masterThrottle);
     SmartDashboard.putNumber("Krab Speed", RobotMap.krabSpeed);
+		SmartDashboard.putNumber("Pixy x1", -1);
+		SmartDashboard.putNumber("Pixy x2", -1);
+		SmartDashboard.putNumber("Pixy mid", -1);
     SmartDashboard.putData(m_drivetrain);
 
     CameraServer.getInstance().startAutomaticCapture();
 
   }
+
+  public static void wait1MSec(long time){
+		// wait1MSec exists only to mimic a function that's familiar to anyone with Vex/RobotC experience.
+		// This will pause execution of code for a set duration (in milliseconds), allowing for simple drive-for-time behaviours
+		long Time0 = System.currentTimeMillis();
+	    long Time1;
+	    long runTime = 0;
+	    while(runTime<time){
+	        Time1 = System.currentTimeMillis();
+	        runTime = Time1 - Time0;
+	        //System.out.println("Our runtime: " + Long.toString(runTime)); // TODO: remove me please
+	    }
+	}
+
 
   /**
    * This function is called every robot packet, no matter the mode. Use
@@ -151,7 +168,6 @@ public class Robot extends TimedRobot {
     RobotMap.krabSpeed = SmartDashboard.getNumber("Krab Speed", 0.3); //Default speed for the krab is 0.3
     //Command driverControls = new DriveWithController();
     driverControls.start();
-  
   }
 
   /**
@@ -159,10 +175,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-
+    
+    Scheduler.getInstance().add(new OperatorControl());
     Scheduler.getInstance().run();
+
     m_pixycam.cameraLEDRing.set(true); //Turn on LED ring. This should be tied to a button later.
-    m_pixycam.centerOnObject();
+    m_pixycam.pixyBroadcast(); //Update SmartDashboard with pixy data.
 
     //JT: Just in case, if for some reason we lose control this restarts the control command
     if (Robot.m_drivetrain.getCurrentCommand() == null) {
