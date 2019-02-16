@@ -175,11 +175,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    
+
     Scheduler.getInstance().add(new OperatorControl());
     Scheduler.getInstance().run();
 
-    m_pixycam.cameraLEDRing.set(true); //Turn on LED ring. This should be tied to a button later.
+    //m_pixycam.cameraLEDRing.set(true); //Turn on LED ring. This should be tied to a button later.
     m_pixycam.pixyBroadcast(); //Update SmartDashboard with pixy data.
 
     //JT: Just in case, if for some reason we lose control this restarts the control command

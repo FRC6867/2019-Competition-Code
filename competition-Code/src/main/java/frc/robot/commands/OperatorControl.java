@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.Robot;
 import frc.robot.OI;
@@ -39,6 +40,7 @@ public class OperatorControl extends Command {
   protected void execute() {
       //JT: This is where the driver code is actually going to go!
 
+      //Master throttle control
       if(Robot.m_oi.operator.getRawButton(RobotMap.leftBumper)) {
         if (RobotMap.masterThrottle > 0.05) {
           SmartDashboard.putNumber("Throttle", SmartDashboard.getNumber("Throttle", 0.7) - 0.05) ;
@@ -52,8 +54,37 @@ public class OperatorControl extends Command {
           RobotMap.masterThrottle = SmartDashboard.getNumber("Throttle", 0.7);
           Robot.wait1MSec(100);
         }
-      }          
- 
+      }       
+
+      //Throttle control for Mr Krab
+      if(Robot.m_oi.operator.getRawButton(RobotMap.aButton)) {
+        if (RobotMap.krabSpeed > 0.05) {
+          SmartDashboard.putNumber("Krab Speed", SmartDashboard.getNumber("Krab Speed", 0.3) - 0.05) ;
+          RobotMap.masterThrottle = SmartDashboard.getNumber("Krab Speed", 0.3);
+          Robot.wait1MSec(100);
+        }
+      }
+      else if(Robot.m_oi.operator.getRawButton(RobotMap.bButton)) {
+        if (RobotMap.krabSpeed < 0.95) {
+          SmartDashboard.putNumber("Krab Speed", SmartDashboard.getNumber("Krab Speed", 0.3) + 0.05) ;
+          RobotMap.masterThrottle = SmartDashboard.getNumber("Krab Speed", 0.3);
+          Robot.wait1MSec(100);
+        }
+      } 
+
+      //Toggle for the ring light. Just so we can reset the pixy if we need it.
+      if(Robot.m_oi.operator.getRawButton(RobotMap.xButton)) {
+        Robot.m_pixycam.cameraLEDRing.set(false);
+      }
+      else {
+        Robot.m_pixycam.cameraLEDRing.set(true);
+      }
+
+      //Manual override for Mr Krab
+      if(Robot.m_oi.operator.getRawAxis(RobotMap.rightStickAxisX) > 0.2 || Robot.m_oi.operator.getRawAxis(RobotMap.rightStickAxisX) < -0.2) {
+        Robot.m_intake.intakeLR.set(ControlMode.PercentOutput, Robot.m_oi.operator.getRawAxis(RobotMap.rightStickAxisX));
+      }
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
