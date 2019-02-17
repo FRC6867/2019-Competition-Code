@@ -46,29 +46,12 @@ public class IntakeSubsystem extends Subsystem {
     krabKlaw.set(DoubleSolenoid.Value.kReverse);
   }
 
-  /* There's no robot to test this on, but I think this is right. Not sure which way the values are running.
-     I don't know what the range of values is, or which way is positive or negative. I pulled the < 500 & > -500 out of the air
-
   public void slideToTheLeft() {
-    if(intakeLR.getSensorCollection().getQuadraturePosition() < 500) {
-      intakeLR.set(ControlMode.PercentOutput, RobotMap.krabSpeed);
-    }
+		intakeLR.set(ControlMode.PercentOutput, RobotMap.krabSpeed / 2);
   }
   
   public void slideToTheRight() {
-    if(intakeLR.getSensorCollection().getQuadraturePosition() > -500) {
-      intakeLR.set(ControlMode.PercentOutput, -RobotMap.krabSpeed);
-    }
-  }
-
-  */
-
-  public void slideToTheLeft() {
-		intakeLR.set(ControlMode.PercentOutput, RobotMap.krabSpeed);
-  }
-  
-  public void slideToTheRight() {
-		intakeLR.set(ControlMode.PercentOutput, -RobotMap.krabSpeed);
+		intakeLR.set(ControlMode.PercentOutput, -(RobotMap.krabSpeed / 2));
   }
   
   public void takeItBackNowYAll() {

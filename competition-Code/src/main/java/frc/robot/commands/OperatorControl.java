@@ -25,9 +25,9 @@ public class OperatorControl extends Command {
 
   public OperatorControl() {
   // Use requires() here to declare subsystem dependencies
-  requires(Robot.m_drivetrain);
-  requires(Robot.m_intake);
-  requires(Robot.m_pixycam);
+  //requires(Robot.m_drivetrain);
+  //requires(Robot.m_intake);
+  //requires(Robot.m_pixycam);
   }
 
   // Called just before this Command runs the first time
@@ -81,13 +81,20 @@ public class OperatorControl extends Command {
       }
 
       //Manual override for Mr Krab
-      if(Robot.m_oi.operator.getRawAxis(RobotMap.rightStickAxisX) > 0.2 || Robot.m_oi.operator.getRawAxis(RobotMap.rightStickAxisX) < -0.2) {
-        RobotMap.krabOwnage = true;
-        Robot.m_intake.intakeLR.set(ControlMode.PercentOutput, Robot.m_oi.operator.getRawAxis(RobotMap.rightStickAxisX));
-      }
-      else {
-        RobotMap.krabOwnage = false; //If the operator wants Mr Krab the operator gets it, otherwise it's back to the driver
-      }
+      if(RobotMap.krabOwnedbyDrive == false) {
+        if(Robot.m_oi.operator.getRawAxis(RobotMap.rightStickAxisX) > 0.2 && Robot.m_intake.intakeLR.getSensorCollection().getQuadraturePosition() > -5000) {
+          RobotMap.krabOwnedbyOp = true;
+          Robot.m_intake.intakeLR.set(ControlMode.PercentOutput, -RobotMap.krabSpeed / 2);
+        }
+        else if(Robot.m_oi.operator.getRawAxis(RobotMap.rightStickAxisX) < -0.2 && Robot.m_intake.intakeLR.getSensorCollection().getQuadraturePosition() < 5000) {
+          RobotMap.krabOwnedbyOp = true;
+          Robot.m_intake.intakeLR.set(ControlMode.PercentOutput, RobotMap.krabSpeed / 2);
+        }
+        else {
+          RobotMap.krabOwnedbyOp = false;
+          Robot.m_intake.takeItBackNowYAll();
+        }
+    }
 
 
 

@@ -53,14 +53,17 @@ public class DriveWithController extends Command {
       }
 
       //Intake L/R slider control
-      if(RobotMap.krabOwnage == false) { //The driver can only have this if the operator isn't using it.
-        if(Robot.m_oi.gamepad.getRawButton(RobotMap.leftBumper)) {
+      if(RobotMap.krabOwnedbyOp == false) { //The driver can only have this if the operator isn't using it.
+        if(Robot.m_oi.gamepad.getRawButton(RobotMap.leftBumper) && Robot.m_intake.intakeLR.getSensorCollection().getQuadraturePosition() < 5000) {
+          RobotMap.krabOwnedbyDrive = true;
           Robot.m_intake.slideToTheLeft();
         }
-        else if(Robot.m_oi.gamepad.getRawButton(RobotMap.rightBumper)) {
+        else if(Robot.m_oi.gamepad.getRawButton(RobotMap.rightBumper) && Robot.m_intake.intakeLR.getSensorCollection().getQuadraturePosition() > -5000) {
+          RobotMap.krabOwnedbyDrive = true;
           Robot.m_intake.slideToTheRight();
         }
         else {
+          RobotMap.krabOwnedbyDrive = false;
           Robot.m_intake.takeItBackNowYAll(); //If no input stop the motor
         }
       }
