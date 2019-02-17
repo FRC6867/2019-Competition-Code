@@ -69,7 +69,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Krab Speed", RobotMap.krabSpeed);
 		SmartDashboard.putNumber("Pixy x1", -1);
 		SmartDashboard.putNumber("Pixy x2", -1);
-		SmartDashboard.putNumber("Pixy mid", -1);
+    SmartDashboard.putNumber("Pixy mid", -1);
+    //SmartDashboard.putNumber("Krabcoder", m_intake.intakeLR.getSensorCollection().getQuadraturePosition()); //I *think* this will output the encoder value to SmartDashboard. Can't test.
     SmartDashboard.putData(m_drivetrain);
 
     CameraServer.getInstance().startAutomaticCapture();
@@ -164,10 +165,13 @@ public class Robot extends TimedRobot {
     }
     
     Command driverControls = m_driveselect.getSelected();
+    Command operatorControls = new OperatorControl();
     RobotMap.masterThrottle = SmartDashboard.getNumber("Throttle", 0.7); //Get value for the throttle. Take 0.7 as a default.
     RobotMap.krabSpeed = SmartDashboard.getNumber("Krab Speed", 0.3); //Default speed for the krab is 0.3
     //Command driverControls = new DriveWithController();
     driverControls.start();
+    operatorControls.start();
+    //SmartDashboard.putNumber("Krabcoder", m_intake.intakeLR.getSensorCollection().getQuadraturePosition()); //I *think* this will output the encoder value to SmartDashboard. Can't test.
   }
 
   /**
@@ -176,11 +180,11 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
 
-    Scheduler.getInstance().add(new OperatorControl());
     Scheduler.getInstance().run();
 
     //m_pixycam.cameraLEDRing.set(true); //Turn on LED ring. This should be tied to a button later.
     m_pixycam.pixyBroadcast(); //Update SmartDashboard with pixy data.
+    //SmartDashboard.putNumber("Krabcoder", m_intake.intakeLR.getSensorCollection().getQuadraturePosition()); //I *think* this will output the encoder value to SmartDashboard. Can't test.
 
     //JT: Just in case, if for some reason we lose control this restarts the control command
     if (Robot.m_drivetrain.getCurrentCommand() == null) {

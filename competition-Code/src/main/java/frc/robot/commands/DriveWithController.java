@@ -53,14 +53,16 @@ public class DriveWithController extends Command {
       }
 
       //Intake L/R slider control
-      if(Robot.m_oi.gamepad.getRawButton(RobotMap.leftBumper)) {
-        Robot.m_intake.slideToTheLeft();
-      }
-      else if(Robot.m_oi.gamepad.getRawButton(RobotMap.rightBumper)) {
-        Robot.m_intake.slideToTheRight();
-      }
-      else {
-        Robot.m_intake.takeItBackNowYAll(); //If no input stop the motor
+      if(RobotMap.krabOwnage == false) { //The driver can only have this if the operator isn't using it.
+        if(Robot.m_oi.gamepad.getRawButton(RobotMap.leftBumper)) {
+          Robot.m_intake.slideToTheLeft();
+        }
+        else if(Robot.m_oi.gamepad.getRawButton(RobotMap.rightBumper)) {
+          Robot.m_intake.slideToTheRight();
+        }
+        else {
+          Robot.m_intake.takeItBackNowYAll(); //If no input stop the motor
+        }
       }
       
       //Tank code. If the stick is clicked it'll apply the cut.
@@ -70,6 +72,7 @@ public class DriveWithController extends Command {
       else {
         Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.leftStickAxisY));
       }
+
       if(Robot.m_oi.gamepad.getRawButton(RobotMap.rightStickClick)) {
         Robot.m_drivetrain.rightDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.leftStickAxisY) * RobotMap.cutThrottle);
       }

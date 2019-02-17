@@ -23,6 +23,7 @@ public class RobotMap {
   public static double masterThrottle = 0.7; //This is our global speed throttler. Adjusting this will make everything slower/faster. 0.7 is a good default for comps
   public static double cutThrottle = 0.5; //This is a multiplier that lets us cut speed on the fly for fine control. Make it bigger to get a larger reduction
   public static double krabSpeed = 0.3; //Speed for Mr. Krab. This may end up being adaptive when we automate with the pixy.
+  public static boolean krabOwnage = false; //Set true when operator is using it, so driver can't interfere.
 
   //DIO for drive encoders
   //We're using CIMcoders: https://www.andymark.com/products/cimcoder

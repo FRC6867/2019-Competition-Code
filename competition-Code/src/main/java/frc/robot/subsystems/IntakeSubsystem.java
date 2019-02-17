@@ -31,6 +31,9 @@ public class IntakeSubsystem extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+
+    //Not sure if this works, but this should be the line to zero the encoder.
+    //intakeLR.getSensorCollection().setQuadraturePosition(0, 15);
   }
 
   public void closeKlaw() {
@@ -42,6 +45,23 @@ public class IntakeSubsystem extends Subsystem {
     //Simple method for opening the claw
     krabKlaw.set(DoubleSolenoid.Value.kReverse);
   }
+
+  /* There's no robot to test this on, but I think this is right. Not sure which way the values are running.
+     I don't know what the range of values is, or which way is positive or negative. I pulled the < 500 & > -500 out of the air
+
+  public void slideToTheLeft() {
+    if(intakeLR.getSensorCollection().getQuadraturePosition() < 500) {
+      intakeLR.set(ControlMode.PercentOutput, RobotMap.krabSpeed);
+    }
+  }
+  
+  public void slideToTheRight() {
+    if(intakeLR.getSensorCollection().getQuadraturePosition() > -500) {
+      intakeLR.set(ControlMode.PercentOutput, -RobotMap.krabSpeed);
+    }
+  }
+
+  */
 
   public void slideToTheLeft() {
 		intakeLR.set(ControlMode.PercentOutput, RobotMap.krabSpeed);

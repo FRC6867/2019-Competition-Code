@@ -82,8 +82,14 @@ public class OperatorControl extends Command {
 
       //Manual override for Mr Krab
       if(Robot.m_oi.operator.getRawAxis(RobotMap.rightStickAxisX) > 0.2 || Robot.m_oi.operator.getRawAxis(RobotMap.rightStickAxisX) < -0.2) {
+        RobotMap.krabOwnage = true;
         Robot.m_intake.intakeLR.set(ControlMode.PercentOutput, Robot.m_oi.operator.getRawAxis(RobotMap.rightStickAxisX));
       }
+      else {
+        RobotMap.krabOwnage = false; //If the operator wants Mr Krab the operator gets it, otherwise it's back to the driver
+      }
+
+
 
   }
 
