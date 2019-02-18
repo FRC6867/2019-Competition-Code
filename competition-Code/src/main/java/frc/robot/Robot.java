@@ -55,10 +55,6 @@ public class Robot extends TimedRobot {
     m_drivetrain.init();
     m_pneumatics.init();
 
-    m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
-    // chooser.addOption("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);
-
     //Our drive select chooser
     m_driveselect.setDefaultOption("Tank Controls", new DriveWithController());
     m_driveselect.addOption("GTA Controls", new DriveGTA());
@@ -119,40 +115,35 @@ public class Robot extends TimedRobot {
   }
 
   /**
-   * This autonomous (along with the chooser code above) shows how to select
-   * between different autonomous modes using the dashboard. The sendable
-   * chooser code works with the Java SmartDashboard. If you prefer the
-   * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-   * getString code to get the auto name from the text box below the Gyro
-   *
-   * <p>You can add additional auto modes by adding additional commands to the
-   * chooser code above (like the commented example) or additional comparisons
-   * to the switch structure below with additional strings & commands.
+   * This autonomous init does the exact same thing as TeleOp init.
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
-
-    /*
-     * String autoSelected = SmartDashboard.getString("Auto Selector",
-     * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-     * = new MyAutoCommand(); break; case "Default Auto": default:
-     * autonomousCommand = new ExampleCommand(); break; }
-     */
-
-    // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.start();
-    }
+    
+    Command driverControls = m_driveselect.getSelected();
+    Command operatorControls = new OperatorControl();
+    RobotMap.masterThrottle = SmartDashboard.getNumber("Throttle", 0.9); //Get value for the throttle. Take 0.9 as a default.
+    RobotMap.krabSpeed = SmartDashboard.getNumber("Krab Speed", 0.5); //Default speed for the krab is 0.3
+    m_intake.intakeLR.getSensorCollection().setQuadraturePosition(0, 20);
+    driverControls.start();
+    operatorControls.start();
   
   }
 
   /**
-   * This function is called periodically during autonomous.
+   * This function is called periodically during autonomous. It's the exact same code from TeleOp, because of Sandstorm
    */
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+
+    m_pixycam.pixyBroadcast(); //Update SmartDashboard with pixy data.
+    SmartDashboard.putNumber("Krabcoder", m_intake.intakeLR.getSensorCollection().getQuadraturePosition());
+
+    //JT: Just in case, if for some reason we lose control this restarts the control command
+    if (Robot.m_drivetrain.getCurrentCommand() == null) {
+      Scheduler.getInstance().add(new DriveWithController());
+    }
   
   }
 
@@ -161,19 +152,14 @@ public class Robot extends TimedRobot {
     // This makes sure that the autonomous stops running when teleop starts running.
     // If you want the autonomous to continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
-    }
     
     Command driverControls = m_driveselect.getSelected();
     Command operatorControls = new OperatorControl();
     RobotMap.masterThrottle = SmartDashboard.getNumber("Throttle", 0.9); //Get value for the throttle. Take 0.9 as a default.
     RobotMap.krabSpeed = SmartDashboard.getNumber("Krab Speed", 0.5); //Default speed for the krab is 0.3
     m_intake.intakeLR.getSensorCollection().setQuadraturePosition(0, 20);
-    //Command driverControls = new DriveWithController();
     driverControls.start();
     operatorControls.start();
-    //SmartDashboard.putNumber("Krabcoder", m_intake.intakeLR.getSensorCollection().getQuadraturePosition()); //I *think* this will output the encoder value to SmartDashboard. Can't test.
   }
 
   /**
@@ -186,7 +172,7 @@ public class Robot extends TimedRobot {
 
     //m_pixycam.cameraLEDRing.set(true); //Turn on LED ring. This should be tied to a button later.
     m_pixycam.pixyBroadcast(); //Update SmartDashboard with pixy data.
-    SmartDashboard.putNumber("Krabcoder", m_intake.intakeLR.getSensorCollection().getQuadraturePosition()); //I *think* this will output the encoder value to SmartDashboard. Can't test.
+    SmartDashboard.putNumber("Krabcoder", m_intake.intakeLR.getSensorCollection().getQuadraturePosition());
 
     //JT: Just in case, if for some reason we lose control this restarts the control command
     if (Robot.m_drivetrain.getCurrentCommand() == null) {
@@ -194,10 +180,6 @@ public class Robot extends TimedRobot {
     }
 
   
-    /*
-    m_drivetrain.rightDrive(0.5);
-    m_drivetrain.leftDrive(0.5);
-    */
   }
 
   /**

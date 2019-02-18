@@ -63,11 +63,14 @@ public class IntakeSubsystem extends Subsystem {
   }
 
   public void centreKrab() {
+      double krabBaseSpeed = 0.15; //We should make this the same as krabSpeed, but we'll do it later.
+      double krabDelta = 0.20; //The variance between the fastest and slowest part of centring function
+      double krabScaledDist = intakeLR.getSensorCollection().getQuadraturePosition() / RobotMap.krabLeftStop; // This will give us a range from 1 to -1
       if(intakeLR.getSensorCollection().getQuadraturePosition() > 150) {
-        intakeLR.set(ControlMode.PercentOutput, -(RobotMap.krabSpeed / 3)); //Precision matters here. We're cutting the speed a touch from manual
+        intakeLR.set(ControlMode.PercentOutput, (-krabBaseSpeed - (krabScaledDist * krabDelta)));     //Precision matters here. We're cutting the speed a touch from manual
       }
       else if(intakeLR.getSensorCollection().getQuadraturePosition() < -150) {
-        intakeLR.set(ControlMode.PercentOutput, RobotMap.krabSpeed / 3);
+        intakeLR.set(ControlMode.PercentOutput, (krabBaseSpeed - (krabScaledDist * krabDelta)));
       }
       else {
         takeItBackNowYAll();

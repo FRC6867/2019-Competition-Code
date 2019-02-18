@@ -50,8 +50,8 @@ public class OperatorControl extends Command {
       }
       else if(Robot.m_oi.operator.getRawButton(RobotMap.rightBumper)) {
         if (RobotMap.masterThrottle < 0.95) {
-          SmartDashboard.putNumber("Throttle", SmartDashboard.getNumber("Throttle", 0.7) + 0.05) ;
-          RobotMap.masterThrottle = SmartDashboard.getNumber("Throttle", 0.7);
+          SmartDashboard.putNumber("Throttle", SmartDashboard.getNumber("Throttle", 0.9) + 0.05) ;
+          RobotMap.masterThrottle = SmartDashboard.getNumber("Throttle", 0.9);
           Robot.wait1MSec(100);
         }
       }       
@@ -60,14 +60,14 @@ public class OperatorControl extends Command {
       if(Robot.m_oi.operator.getRawButton(RobotMap.aButton)) {
         if (RobotMap.krabSpeed > 0.05) {
           SmartDashboard.putNumber("Krab Speed", SmartDashboard.getNumber("Krab Speed", 0.3) - 0.05) ;
-          RobotMap.masterThrottle = SmartDashboard.getNumber("Krab Speed", 0.3);
+          RobotMap.krabSpeed = SmartDashboard.getNumber("Krab Speed", 0.3);
           Robot.wait1MSec(100);
         }
       }
       else if(Robot.m_oi.operator.getRawButton(RobotMap.bButton)) {
         if (RobotMap.krabSpeed < 0.95) {
           SmartDashboard.putNumber("Krab Speed", SmartDashboard.getNumber("Krab Speed", 0.3) + 0.05) ;
-          RobotMap.masterThrottle = SmartDashboard.getNumber("Krab Speed", 0.3);
+          RobotMap.krabSpeed = SmartDashboard.getNumber("Krab Speed", 0.3);
           Robot.wait1MSec(100);
         }
       } 
