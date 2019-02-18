@@ -167,7 +167,7 @@ public class Robot extends TimedRobot {
     
     Command driverControls = m_driveselect.getSelected();
     Command operatorControls = new OperatorControl();
-    RobotMap.masterThrottle = SmartDashboard.getNumber("Throttle", 0.7); //Get value for the throttle. Take 0.7 as a default.
+    RobotMap.masterThrottle = SmartDashboard.getNumber("Throttle", 0.9); //Get value for the throttle. Take 0.9 as a default.
     RobotMap.krabSpeed = SmartDashboard.getNumber("Krab Speed", 0.5); //Default speed for the krab is 0.3
     m_intake.intakeLR.getSensorCollection().setQuadraturePosition(0, 20);
     //Command driverControls = new DriveWithController();

@@ -20,11 +20,13 @@ public class RobotMap {
   // public static int rightMotor = 2;
 
   //These aren't wiring settings, but they are common values that we play with all the time. They're going here.
-  public static double masterThrottle = 0.7; //This is our global speed throttler. Adjusting this will make everything slower/faster. 0.7 is a good default for comps
+  public static double masterThrottle = 0.9; //This is our global speed throttler. Adjusting this will make everything slower/faster. 0.7 is a good default for comps
   public static double cutThrottle = 0.5; //This is a multiplier that lets us cut speed on the fly for fine control. Make it bigger to get a larger reduction
   public static double krabSpeed = 0.5; //Speed for Mr. Krab. This may end up being adaptive when we automate with the pixy.
   public static boolean krabOwnedbyOp = false; 
   public static boolean krabOwnedbyDrive = true;
+  public static int krabRightStop = -5000; //We center Mr Krab at 0, and it counts down to the right and up to the left
+  public static int krabLeftStop = 5000;
 
   //DIO for drive encoders
   //We're using CIMcoders: https://www.andymark.com/products/cimcoder

@@ -82,13 +82,17 @@ public class OperatorControl extends Command {
 
       //Manual override for Mr Krab
       if(RobotMap.krabOwnedbyDrive == false) {
-        if(Robot.m_oi.operator.getRawAxis(RobotMap.rightStickAxisX) > 0.2 && Robot.m_intake.intakeLR.getSensorCollection().getQuadraturePosition() > -5000) {
+        if(Robot.m_oi.operator.getRawAxis(RobotMap.rightStickAxisX) > 0.2 && Robot.m_intake.intakeLR.getSensorCollection().getQuadraturePosition() > RobotMap.krabRightStop) {
           RobotMap.krabOwnedbyOp = true;
-          Robot.m_intake.intakeLR.set(ControlMode.PercentOutput, -RobotMap.krabSpeed / 2);
+          Robot.m_intake.slideToTheRight();
         }
-        else if(Robot.m_oi.operator.getRawAxis(RobotMap.rightStickAxisX) < -0.2 && Robot.m_intake.intakeLR.getSensorCollection().getQuadraturePosition() < 5000) {
+        else if(Robot.m_oi.operator.getRawAxis(RobotMap.rightStickAxisX) < -0.2 && Robot.m_intake.intakeLR.getSensorCollection().getQuadraturePosition() < RobotMap.krabLeftStop) {
           RobotMap.krabOwnedbyOp = true;
-          Robot.m_intake.intakeLR.set(ControlMode.PercentOutput, RobotMap.krabSpeed / 2);
+          Robot.m_intake.slideToTheLeft();
+        }
+        else if(Robot.m_oi.operator.getRawButton(RobotMap.xButton)) {
+          RobotMap.krabOwnedbyOp = true;
+          Robot.m_intake.centreKrab();
         }
         else {
           RobotMap.krabOwnedbyOp = false;

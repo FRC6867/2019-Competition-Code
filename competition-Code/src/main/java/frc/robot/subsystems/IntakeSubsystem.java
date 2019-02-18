@@ -47,15 +47,31 @@ public class IntakeSubsystem extends Subsystem {
   }
 
   public void slideToTheLeft() {
-		intakeLR.set(ControlMode.PercentOutput, RobotMap.krabSpeed / 2);
+    if(intakeLR.getSensorCollection().getQuadraturePosition() < RobotMap.krabLeftStop) {
+      intakeLR.set(ControlMode.PercentOutput, RobotMap.krabSpeed / 2);
+    }
   }
   
   public void slideToTheRight() {
-		intakeLR.set(ControlMode.PercentOutput, -(RobotMap.krabSpeed / 2));
+    if(intakeLR.getSensorCollection().getQuadraturePosition() > RobotMap.krabRightStop) {
+      intakeLR.set(ControlMode.PercentOutput, -(RobotMap.krabSpeed / 2));
+    }
   }
   
   public void takeItBackNowYAll() {
     intakeLR.set(ControlMode.PercentOutput, 0);
+  }
+
+  public void centreKrab() {
+      if(intakeLR.getSensorCollection().getQuadraturePosition() > 150) {
+        intakeLR.set(ControlMode.PercentOutput, -(RobotMap.krabSpeed / 3)); //Precision matters here. We're cutting the speed a touch from manual
+      }
+      else if(intakeLR.getSensorCollection().getQuadraturePosition() < -150) {
+        intakeLR.set(ControlMode.PercentOutput, RobotMap.krabSpeed / 3);
+      }
+      else {
+        takeItBackNowYAll();
+      }
   }
 
   public void falconPunchOut() {
