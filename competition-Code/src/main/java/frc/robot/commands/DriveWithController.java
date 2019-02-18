@@ -36,15 +36,15 @@ public class DriveWithController extends Command {
   protected void execute() {
       //JT: This is where the driver code is actually going to go!
 
-      //Intake Klaw control
-      if(Robot.m_oi.gamepad.getRawButton(RobotMap.xButton)) {
+       //Intake Klaw control
+      if(Robot.m_oi.gamepad.getRawButton(RobotMap.leftBumper) || Robot.m_oi.gamepad.getRawButton(RobotMap.xButton)) {
         Robot.m_intake.openKlaw();
       }
-      else if(Robot.m_oi.gamepad.getRawButton(RobotMap.bButton)) {
+      else if(Robot.m_oi.gamepad.getRawButton(RobotMap.rightBumper) || Robot.m_oi.gamepad.getRawButton(RobotMap.bButton)) {
         Robot.m_intake.closeKlaw();
       }
 
-      //Falcon Punch control
+      //Falcon punch!
       if(Robot.m_oi.gamepad.getRawButton(RobotMap.yButton)) {
         Robot.m_intake.falconPunchOut();
       }
@@ -52,13 +52,14 @@ public class DriveWithController extends Command {
         Robot.m_intake.falconPunchIn();
       }
 
+      
       //Intake L/R slider control
       if(RobotMap.krabOwnedbyOp == false) { //The driver can only have this if the operator isn't using it.
-        if(Robot.m_oi.gamepad.getRawButton(RobotMap.leftBumper) && Robot.m_intake.intakeLR.getSensorCollection().getQuadraturePosition() < RobotMap.krabLeftStop) {
+        if(Robot.m_oi.gamepad.getRawAxis(RobotMap.leftTrigger) > 0.1 && Robot.m_intake.intakeLR.getSensorCollection().getQuadraturePosition() < RobotMap.krabLeftStop) {
           RobotMap.krabOwnedbyDrive = true;
           Robot.m_intake.slideToTheLeft();
         }
-        else if(Robot.m_oi.gamepad.getRawButton(RobotMap.rightBumper) && Robot.m_intake.intakeLR.getSensorCollection().getQuadraturePosition() > RobotMap.krabRightStop) {
+        else if(Robot.m_oi.gamepad.getRawAxis(RobotMap.rightTrigger) > 0.1 && Robot.m_intake.intakeLR.getSensorCollection().getQuadraturePosition() > RobotMap.krabRightStop) {
           RobotMap.krabOwnedbyDrive = true;
           Robot.m_intake.slideToTheRight();
         }
@@ -67,7 +68,9 @@ public class DriveWithController extends Command {
           Robot.m_intake.takeItBackNowYAll(); //If no input stop the motor
         }
       }
-      
+
+
+
       //Tank code. If the stick is clicked it'll apply the cut.
       if(Robot.m_oi.gamepad.getRawButton(RobotMap.leftStickClick)) {
         Robot.m_drivetrain.leftDrive(Robot.m_oi.gamepad.getRawAxis(RobotMap.leftStickAxisY) * RobotMap.cutThrottle);
