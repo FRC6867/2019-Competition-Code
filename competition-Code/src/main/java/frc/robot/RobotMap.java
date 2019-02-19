@@ -58,8 +58,7 @@ public class RobotMap {
   public static int BACK_RIGHT_DRIVE_CAN = 20;
 
   //CAN IDs for CLIMB motors
-  public static int CLIMB_MOTORL_CAN = 30;
-  public static int CLIMB_MOTORR_CAN = 31;
+  public static int CLIMB_MOTOR_CAN = 50;
 
   //CAN IDs for instake system
   public static int INTAKE_LR_CAN = 40;

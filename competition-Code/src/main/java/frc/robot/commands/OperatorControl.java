@@ -97,10 +97,22 @@ public class OperatorControl extends Command {
         else {
           RobotMap.krabOwnedbyOp = false;
           Robot.m_intake.takeItBackNowYAll();
+          
         }
     }
-
-
+    System.out.println("Operator left trigger is:" + Double.toString(Robot.m_oi.operator.getRawAxis(RobotMap.leftTrigger)));
+    System.out.println("Operator right trigger is:" + Double.toString(Robot.m_oi.operator.getRawAxis(RobotMap.rightTrigger)));
+    
+    if(Robot.m_oi.operator.getRawAxis(RobotMap.leftTrigger) > 0.2) {
+      Robot.m_drivetrain.climb(1);
+    }
+    else if(Robot.m_oi.operator.getRawAxis(RobotMap.rightTrigger) > 0.2) {
+      Robot.m_drivetrain.climb(-1);
+    }
+    else {
+      Robot.m_drivetrain.climb(0);
+    }
+    
 
   }
 
